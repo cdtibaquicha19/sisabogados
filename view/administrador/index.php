@@ -1,5 +1,4 @@
 <?php
-
   session_start();
   if(!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1){
     header('location: ../../index.php');
@@ -61,8 +60,8 @@
 	  <?php 
 	  if($numero>0){
 		  while($row = mysqli_fetch_object($datos)){
-		
-												echo '<li><a href="proyectos/votar.php?id='.$row->id_votacion.'">Proyecto a votacion '.$row->nombre_proyecto.' </a></li>';
+
+	echo '<li><a href="proyectos/votar.php?id='.$row->id_votacion.'">Proyecto a votacion '.$row->nombre_proyecto.' </a></li>';
 											}
 }else{
 					 echo '<li><a href="#">Sin notificaciones  </a></li>' ;
@@ -106,19 +105,12 @@
 	
       <div class="left_nav_slidebar">
         <ul>
-          <li class="left_nav_active theme_border"><a href="javascript:void(0);"><i class="fa fa-home"></i> CALENDARIO <span class="left_nav_pointer"></span> <span class="plus"><i class="fa fa-plus"></i></span> </a>
+          <li class="left_nav_active theme_border"><a href="javascript:void(0);"><i class="fa fa-home"></i> CALENDARIO <span class="left_nav_pointer"></span>  </a>
             
           </li>
           
           <li> <a href="proyectos/index.php"> <i class="fa fa-tasks"></i>PROYECTOS
-			  <span class="badge badge color_2" style="float: right">
-				   
-			<?php
-				  $datos = mysqli_query($con,"SELECT * from proyectos ") ;
-				  $numero = mysqli_num_rows($datos);
-				  echo $numero ; 
-			  ?>
-		    </span> 
+			  
 			  <span class="plus"><i class="fa fa-plus"></i></span></a>
             
           </li>
@@ -134,13 +126,13 @@
 				  </span> <span class="plus"><i class="fa fa-plus"></i></span></a>
             
           </li>	
-		<li> <a href="dependencia/index.php"> <i class="fa fa-map-o"></i>
-			DEPENDENCIAS
-				   <span class="badge badge color_2" style="float: right">
-				   
-			Nuevo+ 
-		    </span> 
-				  </a>
+		
+          
+          	<li> <a href="configuracion/index.php"> <i class="fa fa-gear"></i>
+			CONFIGURACION
+				   </span> <span class="plus"><i class="fa fa-plus"></i></span>
+                  </a>
+                  
             
           </li>	
          
@@ -153,9 +145,9 @@ window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
 
 
 
-        <a class"btn btn-danger" href="javascript:finestraSecundaria('https://www.sistema.mandragoraproducciones.com.co/view/chat/')">
+        <a class"btn btn-danger" href="javascript:finestraSecundaria('https://sistema.serempresarialgyp.com/view/chat/')">
             
-            <img src="../../../img/icono_mens.png" width="55" />
+            <img src="../../img/icono_mens.png" width="55" />
             
             Iniciar chat </a>
             
@@ -220,8 +212,8 @@ window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
 				 $datos = mysqli_query( $con, "SELECT * from votaciones" );
 							            	  
 									  $numero = mysqli_num_rows( $datos) ;
-									  
-									  $datos2 = mysqli_query( $con, "SELECT * from asignaciones where id_empleado ='".$_SESSION['correo']."'" );
+$datos2 = mysqli_query( $con, "SELECT * from asignaciones where id_empleado 
+like '%".$_SESSION['correo']."%'" );
 							            	  
 									  $numero2 = mysqli_num_rows( $datos2) ;
 									
@@ -242,7 +234,7 @@ window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
 												echo '<li><a href="proyectos/votar.php?id='.$row->id_votacion.'">Proyecto a votacion '.$row->nombre_proyecto.' </a></li>';
 											}
 }else{
-					 echo '<li><a href="#">Sin notificaciones  </a></li>' ;
+					 
 				  }
 				  
 				   if($numero2>0){

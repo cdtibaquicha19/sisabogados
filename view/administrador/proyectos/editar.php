@@ -71,9 +71,9 @@
 <?php 
 include("../../../model/function.php");
 $id = $_GET['id'];
-select_id('proyectos','id',$id);
-		 $inicio = $row->inicio;  
-			$fin =  $row->fin; 
+select_id('calendar','id',$id);
+		 $inicio = $row->start;  
+			$fin =  $row->end; 
 ?>
   <div class="inner">
     <div class="left_nav">
@@ -136,7 +136,7 @@ select_id('proyectos','id',$id);
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Cargar documentos a <?php echo $row->nombre; ?></h4>
+        <h4 class="modal-title" id="myModalLabel">Cargar documentos a <?php echo $row->title; ?></h4>
       </div>
       <div class="modal-body">
 
@@ -184,7 +184,7 @@ location = location;
 	
 <input class="form-control" name="fichero" type="file" size="150" maxlength="150">  
 <input type="hidden" class="form-control" name="nombre" value="<?php echo $row->id; ?>" size="70" maxlength="70"> 
-<input type="hidden" class="form-control" value="<?php echo $row->nombre; ?> " name="description" size="100" maxlength="250">
+<input type="hidden" class="form-control" value="<?php echo $row->title; ?> " name="description" size="100" maxlength="250">
 	
 
 							
@@ -225,7 +225,7 @@ location = location;
 				  
 				 
 				  
-				  echo $row->nombre; ?></h3>
+				  echo $row->title; ?></h3>
 			   
             </div>
          	<div class="porlets-content">
@@ -234,13 +234,13 @@ location = location;
 	date_default_timezone_set('America/Bogota');
 	$actualizacion = date("Y-m-d/H:m:s ").$_SESSION['usuario'];
 	if(isset($_POST['submit'])){
-		$field = array("nombre"=>$_POST['nombre'], 
-		"descripcion"=>$_POST['descripcion'],
+		$field = array("title"=>$_POST['nombre'], 
+		"description"=>$_POST['descripcion'],
 		"actualizado"=>$actualizacion
 					   
 					  );
 		
-		$tbl = "proyectos";
+		$tbl = "calendar";
 		edit($tbl,$field,'id',$id);
 		echo '<script type="application/javascript">
 	
@@ -260,29 +260,34 @@ if(isset($_POST['submit4'])){
 	
 	
 	$actividad = $_POST['actividad'] ;
-	$idempleado = $_POST['id_empleado'] ;
+	
+	
+	//$idempleado = $_POST['id_empleado'] ;
 	$fechaini= $_POST['fecha'] ;
 	$fechafin= $_POST['fecha_fin'] ;
 	$observaciones= $_POST['observaciones'] ;
-	$proyecto = $row->nombre; 
+	$proyecto = $row->title; 
+	$correos=implode(', ', $_POST['id_empleado']);
 	
 
-	$query =  "INSERT INTO asignaciones (id , asignacion , id_proyecto ,nombre_proyecto, id_empleado, fecha, feha_fin, observaciones, estado) VALUES (NULL, '$actividad','$id','$proyecto','$idempleado','$fechaini', '$fechafin', '$observaciones', 'asignado');";
+	
+
+	$query =  "INSERT INTO asignaciones (id , asignacion , id_proyecto ,nombre_proyecto, id_empleado, fecha, feha_fin, observaciones, estado) VALUES (NULL, '$actividad','$id','$proyecto','$correos','$fechaini', '$fechafin', '$observaciones', 'asignado');";
 	
 	
 	if(db_query($query)){
 		
-$para      = $idempleado.",cdtibaquicha19@gmail.com";
-$titulo    = 'Sistema  notificacion joaking ';
-$mensaje   = 'Se ha asignado una nueva actividad con fecha '.$fechafin." como plazo maximo de entrega ";
-$cabeceras = 'From: info@joakingpd.com' . "\r\n" .
-    'Reply-To: disenoweb@mandragoraproducciones.com.co' . "\r\n" .
+$para      = $correos;
+$titulo    = 'Sistema  notificacion';
+$mensaje   = 'Se ha asignado una nueva actividad : '.$proyecto.' '.$observaciones .' con fecha '.$fechafin." como plazo maximo de entrega ";
+$cabeceras = 'From: info@bihaosas.co' . "\r\n" .
+    'Reply-To: soporte@multiaccess.co' . "\r\n" .
     'X-Mailer: PHP/' . phpversion();
 mail($para, $titulo, $mensaje, $cabeceras);
 header('Location: '.$_SERVER['HTTP_REFERER']);
 		echo '<script type="application/javascript">
 	
-swal("Se ha asignado correctamente  : ","se envio correo a '.$idempleado.'","success")
+swal("Se ha asignado correctamente  : ","se envio correo a '.$correos.'","success")
 .then((value) => {
 location = location;
 });
@@ -299,29 +304,24 @@ location = location;
 	</script>
 	' ;
 	
-	
-	
-			
-
-		
 	}	
 }
 ?>			
 
-	<div class="row">
+	<div class="row" >
 		<div class="col-md-3">
 			<strong><span><h5>Nombre</h5></span></strong>
-			<input class="form-control " type="text" value="<?php echo $row->nombre;?>" name="nombre"  />
+			<input class="form-control " type="text" value="<?php echo $row->title;?>" name="nombre"  />
 			<br />
 			<strong><span><h5>Fecha inicio</h5></span></strong>
-				<h3><?php echo $row->inicio;?></h3>
+				<h3><?php echo $row->start;?></h3>
 		</div>
 		<div class="col-md-9">
 			<strong><span><h5>Descripcion</h5></span></strong>
-<input class="form-control " type="text" value="<?php echo $row->descripcion;?>" name="descripcion"  />	
+<input class="form-control " type="text" value="<?php echo $row->description;?>" name="descripcion"  />	
 			<br />
 			<strong><span><h5>Fecha fin</h5></span></strong>
-			<h3><?php echo $row->fin;?></h3>
+			<h3><?php echo $row->end;?></h3>
 		
 		</div>
 	
@@ -334,8 +334,7 @@ location = location;
 		
 		<!-- Button trigger modal -->
 <button style="float: right" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal5">
-  Crear asignacion a Grupo de trabajo
-</button>
+  Crear asignacion </button>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -343,55 +342,33 @@ location = location;
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Creador de asignaciones </h4>
+        <h4 class="modal-title" id="myModalLabel">Creacion de Asignaciones </h4>
       </div>
       <div class="modal-body">
-       
-		  
-		  
-		  
-		   <form action=" " method="post">
-			   <!--/
-			   <p>Seleccione actividad</p>
-			   <select  name="actividad" class="form-control">
-			   <option  >Seleccione</option>
-				<option disabled>-------------- FASE 1 (Planeacion )-------------</option>
-				<option  class="" value="titulo" >Titulo</option>
-				<option  class="" value="antecedentes" >Antecedentes</option>
-				<option  class="" value="justificacion" >Justificacion</option>
-				<option  class="" value="componentes" >Componentes</option>
-				<option disabled>-------------- FASE 2 (Actividades )-------------</option>
-				<option  class="" value="actividades" >Actividades</option>
-				<option  class="" value="indicadores" >Indicadores y medios de verificacion</option>
-				<option  class="" value="factores" >Factores externos</option>
-				<option disabled>-------------- FASE 3 (Presupuesto )-------------</option>
-				<option  class="" value="insumos" >Insumos</option>
-				<option  class="" value="viabilidad" >Viabilidad</option>
-				<option  class="" value="metodologia" >Metodologia</option>   
-				<option disabled>-------------- FASE 4 (Ejecucion )-------------</option>
-				<option  class="" value="calendarios" >Calendarios ejecucion de actividades </option>
-				<option  class="" value="monitoreo" >Monitoreo y evaluacion </option>
-				<option  class="" value="anexos" >Anexos</option>      
-				   
-				   
-				   
-			   </select>
-			   -->
-			   
-		  <br>
-			  <p>Seleccione usuario</p>
-		  <select  name="id_empleado" class="form-control">
-			  <option  class="" value="" >Seleccione</option>
-			  <?php 
+       <div class="row">
+<form class="form" action=" " method="post">			   
+
+<div class="col-md-12">
+<BR />
+<p>Seleccione usuario (ctrl + click para seleccion multiple)</p>        
+<select name="id_empleado[]" class="form-control"  size="7" multiple="multiple" >
+  <?php 
 	$sql = "select * from usuarios ";				 
 	$result = db_query($sql);
 		   
     while($row = mysqli_fetch_object($result)){
 	?>	  
-		<option value="<?php echo $row->correo;?>" ><?php echo $row->nombre;?></option>
+<option value="<?php echo $row->correo;?>" ><?php echo $row->nombre;?></option>
 	<?php } ?>
-		   </select>
-			   
+ </select>
+<br />
+</div>
+<br />
+
+
+
+
+
 			   <div class="col-md-6">
 			   <p>Fecha inicio </p> 
 				<input class="form-control" type="date"  name="fecha" />
@@ -404,14 +381,15 @@ location = location;
 					<input class="form-control" type="date"  name="fecha_fin" />
 			   
 			   </div>
-			 
+			  <div class="col-md-12">
 			
 			  <p>Observaciones  </p>
-			<input  class="form-control" type="text"  name="observaciones" /> 
-		  <br>
-		<br>
+			<textarea class="form-control" type="text"  name="observaciones" ></textarea> 
+
+          </div>
 		
 		
+		</div>
 		  
 		  
 		  

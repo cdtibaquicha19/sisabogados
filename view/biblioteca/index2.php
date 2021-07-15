@@ -27,7 +27,7 @@
    
     <div class="brand">
       
-		<div class="logo" style="display:block"><span class="theme_color">ADMINISTRADOR</span> </div>
+		<div class="logo" style="display:block"><span class="theme_color">GRUPO DE TRABAJO</span> </div>
     </div>
     <!--\\\\\\\ brand end \\\\\\-->
     <div class="header_top_bar">
@@ -106,15 +106,7 @@
           </li>	
           
           
-          <li> <a href="../grupotrabajo/dependencia/index.php"> <i class="fa fa-map-o"></i>
-			DEPENDENCIAS
-				   <span class="badge badge color_2" style="float: right">
-				   
-			Nuevo+ 
-		    </span> 
-				  </a>
-            
-          </li>	
+         
          
         </ul>
         <script language=javascript>
@@ -125,7 +117,7 @@ window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
 
 
 
-        <a class"btn btn-danger" href="javascript:finestraSecundaria('https://www.sistema.mandragoraproducciones.com.co/view/chat/')">
+        <a class"btn btn-danger" href="javascript:finestraSecundaria('https://sistema.serempresarialgyp.com/view/chat/')">
             
             <img src="../../../img/icono_mens.png" width="55" />
             
@@ -172,7 +164,55 @@ window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
            
          <div class="porlets-content">
 
-			 <iframe  src="../biblioteca/<?php echo $_SESSION['departamento']; ?>/index.html" width="95%" scrolling="no" frameborder="0" height="1200px;"></iframe>
+			 <?php 
+	include("../../model/function.php");
+
+	$sql = "select * from departamentos";
+	$result = db_query($sql);
+	while($row2 = mysqli_fetch_object($result)){
+	?>
+   
+   		<?php 
+			
+if(stristr($_SESSION['departamento'], $row2->nombre_depa)){
+			
+			echo '
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-primary">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+	  
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#'.$row2->nombre_depa.'" aria-expanded="true" aria-controls="collapseOne">
+          '.$row2->nombre_depa.'
+        </a>
+      </h4>
+    </div>
+    <div id="'.$row2->nombre_depa.'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+       
+	    <iframe  src="../biblioteca/'.$row2->nombre_depa.'/index.html" width="95%" scrolling="no" frameborder="0" height="1200px;"></iframe>
+	   
+	   
+	   
+      </div>
+    </div>
+  </div>
+			
+	
+			<br>';
+		}else{
+			
+			}
+		
+		?>
+ 
+		
+	</tr>
+	<?php
+	
+	 }
+	
+	 ?>
 			 
 			 
             </div>

@@ -3,6 +3,7 @@ include( "../../../model/function.php" );
 session_start();
 if ( !isset( $_SESSION[ 'tipo' ] ) || $_SESSION[ 'tipo' ] != 1 ) {
 	header( 'location: ../../../index.php' );
+
 }
 ?>
 
@@ -132,16 +133,13 @@ if ( !isset( $_SESSION[ 'tipo' ] ) || $_SESSION[ 'tipo' ] != 1 ) {
 				<img src="../../../img/logo joaking curvasblanco.png" width="90%" alt=""/>
 				<div class="left_nav_slidebar">
 					<ul>
-						<li><a href="../index.php"><i class="fa fa-home"></i>CALENDARIO 
-				   
-			
-				  </span>    <span class="plus"><i class="fa fa-plus"></i></span> </a>
+						<li><a href="../index.php"><i class="fa fa-home"></i>CALENDARIO    <span class="plus"><i class="fa fa-plus"></i></span> </a>
 
 						</li>
 
 						<li class="left_nav_active theme_border"> <a href=""> <i class="fa fa-tasks"></i>PROYECTOS
 			 <span class="left_nav_pointer"></span>
-			  <span class="plus"><i class="fa fa-plus"></i></span></a>
+			  </a>
 
 						</li>
 						<li> <a href="../usuarios/index.php"> <i class="fa fa-user"></i>
@@ -155,26 +153,25 @@ if ( !isset( $_SESSION[ 'tipo' ] ) || $_SESSION[ 'tipo' ] != 1 ) {
 				  </span> <span class="plus"><i class="fa fa-plus"></i></span></a>
 
 						</li>
-						<li> <a href="../dependencia/index.php"> <i class="fa fa-map-o"></i>
-			DEPENDENCIAS
-				   <span class="badge badge color_2" style="float: right">
-				   
-			Nuevo+ 
-		    </span> 
-				  </a>
-
-						</li>
+					
+                        <li> <a href="../configuracion/index.php"> <i class="fa fa-gear"></i>
+			CONFIGURACION
+				   </span> <span class="plus"><i class="fa fa-plus"></i></span>
+                  </a>
+                  
+            
+          </li>	
 					</ul>
 					
-					        <<script language=javascript>
+					        <script language=javascript>
 function finestraSecundaria (url){
-window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
+window.open(url, "CHAT SISTEMA", "width=900, height=600")
 }
 </script>
 
 
 
-        <a class"btn btn-danger" href="javascript:finestraSecundaria('https://www.sistema.mandragoraproducciones.com.co/view/chat/')">
+        <a class"btn btn-danger" href="javascript:finestraSecundaria('https://sistema.serempresarialgyp.com/view/chat/')">
             
             <img src="../../../img/icono_mens.png" width="55" />
             
@@ -207,8 +204,7 @@ window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
 				<!--\\\\\\\ contentpanel start\\\\\\-->
 				<div class="pull-left breadcrumb_admin clear_both">
 					<div class="pull-left page_title theme_color">
-						<h1>PROYECTOS  
-    </a></h1>
+						<h1>PROYECTOS</h1>
 
 					</div>
 
@@ -241,27 +237,27 @@ window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
 											<tbody>
 <?php 
 
-	$sql = "select * from proyectos ";
+	$sql = "select * from calendar where category ='Proyectos' ";
 	$result = db_query($sql);
 	while($row = mysqli_fetch_object($result)){
 	?>
 												<tr>
 													<td>
 														<strong>
-															<?php echo $row->nombre;?>
+															<?php echo $row->title;?>
 														</strong>
 													</td>
 													<td width="25%">
-														<?php echo $row->descripcion;?>
+														<?php echo $row->description;?>
 													</td>
 													<td>
 														<?php echo $row->actualizado;?>
 													</td>
 													<td>
-														<?php echo $row->inicio;?>
+														<?php echo $row->start;?>
 													</td>
 													<td>
-														<?php echo $row->fin;?>
+														<?php echo $row->end;?>
 													</td>
 													<td>
 

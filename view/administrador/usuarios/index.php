@@ -114,7 +114,7 @@
           </li>
 		<li class="left_nav_active theme_border"> <a href="#"> <i class="fa fa-user"></i>
 			USUARIOS <span class="left_nav_pointer"></span>
-				  </span></span><span class="plus"><i class="fa fa-plus"></i></span></a>
+				  </span></span></a>
             
           </li>	
 	  
@@ -124,13 +124,12 @@
 				  </span> <span class="plus"><i class="fa fa-plus"></i></span></a>
             
           </li>	
-	<li> <a href="../dependencia/index.php"> <i class="fa fa-map-o"></i>
-			DEPENDENCIAS
-				   <span class="badge badge color_2" style="float: right">
-				   
-			Nuevo+ 
-		    </span> 
-				  </a>
+	
+          <li> <a href="../configuracion/index.php"> <i class="fa fa-gear"></i>
+			CONFIGURACION
+				   </span> <span class="plus"><i class="fa fa-plus"></i></span>
+                  </a>
+                  
             
           </li>	
         </ul>
@@ -142,7 +141,7 @@ window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
 
 
 
-        <a class"btn btn-danger" href="javascript:finestraSecundaria('https://www.sistema.mandragoraproducciones.com.co/view/chat/')">
+        <a class"btn btn-danger" href="javascript:finestraSecundaria('https://sistema.serempresarialgyp.com/view/chat/')">
             
             <img src="../../../img/icono_mens.png" width="55" />
             
@@ -215,7 +214,7 @@ if (!empty($_POST['submit2'])) {
 					  "usuario"=>$_POST['usuario'],
 					  "clave"=>base64_encode($_POST['password']),
 					  "perfil_profesional"=>$_POST['perfil'],
-					  "departamento"=>$_POST['departamento'], 
+					  "departamento"=>implode(' , ', $_POST['departamento']), 
 					  "status"=>$_POST['estado'], 
 					  "tipo"=>$_POST['tipo'], 
 					  "fregistro"=>$fecha,
@@ -302,14 +301,29 @@ location = location;
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-12 control-label">Departamento</label>
 						<div class="col-sm-12">
+                        Seleccion (ctrl + click para seleccion multiple)
 							
-							<select name="departamento" class="form-control">
-							  <option value="Administrativo">Administrativo</option>
-								<option value="Financiero">Financiero</option>
-								<option value="Logistica">Logistica</option>
-								<option value="Operaciones">Operaciones</option>
-								<option value="Tic">Tic</option>
-								<option value="Comunicaciones">Comunicaciones</option>
+							<select name="departamento[]"  multiple="multiple"class="form-control">
+                            
+                            
+                            
+                              <?php 
+	include("../../model/function.php");
+
+	$sql = "select * from departamentos";
+	$result = db_query($sql);
+	while($row2 = mysqli_fetch_object($result)){
+		
+	?>
+    <?php 
+	echo '
+							  <option value="'.$row2->nombre_depa.'">'.$row2->nombre_depa.'</option>';
+			?>				
+            <?php
+	
+	 }
+	
+	 ?>
 							</select>
 							
 			

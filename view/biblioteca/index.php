@@ -80,7 +80,7 @@
 	
       <div class="left_nav_slidebar">
         <ul>
-          <li ><a href="../administrador/index.php"><i class="fa fa-home"></i> CALENDARIO <span class="left_nav_pointer"></span> <span class="plus"><i class="fa fa-plus"></i></span> </a>
+          <li ><a href="../administrador/index.php"><i class="fa fa-home"></i> CALENDARIO <span class="plus"><i class="fa fa-plus"></i></span> </a>
             
           </li>
           
@@ -104,17 +104,16 @@
           </li>	
 		<li class="left_nav_active theme_border"> <a href="index.php"> <i class="fa fa-bookmark"></i>
 			BIBLIOTECA 
-				   
-				  </span> <span class="plus"><i class="fa fa-plus"></i></span></a>
+				   <span class="left_nav_pointer"></span> 
+				  </a>
             
           </li>	
-		<li> <a href="../administrador/dependencia/index.php"> <i class="fa fa-map-o"></i>
-			DEPENDENCIAS
-				   <span class="badge badge color_2" style="float: right">
-				   
-			Nuevo+ 
-		    </span> 
-				  </a>
+	
+          <li> <a href="../administrador/configuracion/index.php"> <i class="fa fa-gear"></i>
+			CONFIGURACION
+				   </span> <span class="plus"><i class="fa fa-plus"></i></span>
+                  </a>
+                  
             
           </li>	
         </ul>
@@ -127,24 +126,17 @@ window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
 
 
 
-        <a class"btn btn-danger" href="javascript:finestraSecundaria('https://www.sistema.mandragoraproducciones.com.co/view/chat/')">
+        <a class"btn btn-danger" href="javascript:finestraSecundaria('https://sistema.serempresarialgyp.com/view/chat/')">
             
-            <img src="../../../img/icono_mens.png" width="55" />
+            <img src="../../img/icono_mens.png" width="55" />
             
             Iniciar chat </a>
             
             <span class="badge badge color_2">
 				  <?php
-		
-				
-			
-				 $datos2 = mysqli_query( $con, "SELECT * from chat where reciever_userid ='".$_SESSION['idusuario']."' and status = '1'" );
-			
-							            	  
+				 $datos2 = mysqli_query( $con, "SELECT * from chat where reciever_userid ='".$_SESSION['idusuario']."' and status = '1'" );      	  
 									  $numero = mysqli_num_rows( $datos2) ;
-									
-									  echo $numero;
-									
+									  echo $numero;				
 				  ?>			  
 				  </span>
     
@@ -174,58 +166,100 @@ window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
 			 
 			 
 			 <div>
+             
+             
 
   <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#Administrativo" aria-controls="home" role="tab" data-toggle="tab">ARCHIVOS</a></li>
+
+  
+  <?php 
+	include("../../model/function.php");
+
+	$sql = "select * from departamentos";
+	$result = db_query($sql);
+	while($row2 = mysqli_fetch_object($result)){
+	?>
+   
+   		<?php 
+			
+if(stristr($_SESSION['departamento'], $row2->nombre_depa)){
+			
+			echo '
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-primary">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+	  
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#'.$row2->nombre_depa.'" aria-expanded="true" aria-controls="collapseOne">
+          '.$row2->nombre_depa.'
+        </a>
+      </h4>
+    </div>
+    <div id="'.$row2->nombre_depa.'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+       
+	    <iframe  src="../biblioteca/'.$row2->nombre_depa.'/index.html" width="95%" scrolling="no" frameborder="0" height="1200px;"></iframe>
+	   
+	   
+	   
+      </div>
+    </div>
+  </div>
+			
+	
+			<br>';
+		}else{
+			
+			}
+		
+		?>
+ 
+		
+	</tr>
+	<?php
+	
+	 }
+	
+	 ?>
+    
   </ul>
 
   <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="Administrativo">
-	  
-	  <iframe  src="../biblioteca/Administrativo/index.html" width="95%" scrolling="no" frameborder="0" height="1200px;"></iframe>
-	  
-	  
-	  </div>
-    <div role="tabpanel" class="tab-pane" id="Financiero">
-	  
-	  
-	  <iframe  src="../biblioteca/Financiero/index.html" width="95%" scrolling="no" frameborder="0" height="1200px;"></iframe>
-	  
-	  </div>
-	  
-	  
-	  
-	   <div role="tabpanel" class="tab-pane" id="Logistica">
-	  
-	  
-	  <iframe  src="../biblioteca/Logistica/index.html" width="95%" scrolling="no" frameborder="0" height="1200px;"></iframe>
-	  
-	  </div>
-	  
-	   <div role="tabpanel" class="tab-pane" id="Operaciones">
-	  
-	  
-	  <iframe  src="../biblioteca/Operaciones/index.html" width="95%" scrolling="no" frameborder="0" height="1200px;"></iframe>
-	  
-	  </div>
-	  
-	  
-	  
-	   <div role="tabpanel" class="tab-pane" id="Tic">
-	  
-	  
-	  <iframe  src="../biblioteca/Tic/index.html" width="95%" scrolling="no" frameborder="0" height="1200px;"></iframe>
-	  
-	  </div>
-	  <div role="tabpanel" class="tab-pane" id="Comunicaciones">
-	  
-	  
-	  <iframe  src="../biblioteca/Comunicaciones/index.html" width="95%" scrolling="no" frameborder="0" height="1200px;"></iframe>
-	  
-	  </div>
-	  
+  
+  
+    <?php 
+
+	$sql = "select * from departamentos";
+	$result = db_query($sql);
+	while($row = mysqli_fetch_object($result)){
+	?>
+    <div class="tab-content">
+		<?php 
+		
+		if($row->status == 1){
+			
+			echo '
+
+
+			';
+		}else{
+			
+			echo $row->nombre_depa." (inactivo) ";
+			}
+		
+		?>
+ 
+		
+	</tr>
+	<?php
+	
+	 }
+	
+	 ?>
+  
+  
+     
+	 
 
     
   </div>

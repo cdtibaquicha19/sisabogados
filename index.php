@@ -63,15 +63,14 @@
 
             <legend class="center">Sistema gestion V 3.0</legend>
             
-            <div class="alert alert-info" role="alert">Notas de version V4.0
+            <div class="alert alert-info" role="alert">Notas de version V3.0
             
             <ul>
            
             
             
-                <li>Integracion modulo chat  </li>
-                <li>Asignacion de modulos a grupo de trabajo </li>
-                <li>Correccion de errores </li>
+                <li>Correccion de errores   </li>
+             
             </ul>
             
             

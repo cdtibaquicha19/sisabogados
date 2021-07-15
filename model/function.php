@@ -1,10 +1,11 @@
 <?php
-$con = mysqli_connect("localhost","samuaeve_rootsis","@BH4gj*n3t,V","samuaeve_sistema");
+$con = mysqli_connect("localhost","samuaeve_rootB","@BH4gj*n3t,V","samuaeve_sistemB");
 mysqli_set_charset($con,'utf8'); 
+
 
 function db_query($query) {
     
-    $connection = mysqli_connect("localhost","samuaeve_rootsis","@BH4gj*n3t,V","samuaeve_sistema");
+    $connection = mysqli_connect("localhost","samuaeve_rootB","@BH4gj*n3t,V","samuaeve_sistemB");
     mysqli_set_charset($connection,'utf8'); 
     $result = mysqli_query($connection,$query);
     return $result;
@@ -13,7 +14,7 @@ function db_query($query) {
 	
 	$fields = array_keys($form_data);
 	$sql="INSERT INTO ".$tblname." (".implode(',', $fields).")  VALUES('".implode("','", $form_data)."')";
-	echo $sql;
+	 echo $sql;
 	return db_query($sql);
 
 }
@@ -42,6 +43,37 @@ function select_id($tblname,$field_name,$field_id){
 
 	return $sql;
 
+}
+
+function copiar($fuente, $destino)
+{
+    if(is_dir($fuente))
+    {
+        $dir=opendir($fuente);
+        while($archivo=readdir($dir))
+        {
+            if($archivo!="." && $archivo!="..")
+            {
+                if(is_dir($fuente."/".$archivo))
+                {
+                    if(!is_dir($destino."/".$archivo))
+                    {
+                        mkdir($destino."/".$archivo);
+                    }
+                    copiar($fuente."/".$archivo, $destino."/".$archivo);
+                }
+                else
+                {
+                    copy($fuente."/".$archivo, $destino."/".$archivo);
+                }
+            }
+        }
+        closedir($dir);
+    }
+    else
+    {
+        copy($fuente, $destino);
+    }
 }
 
 

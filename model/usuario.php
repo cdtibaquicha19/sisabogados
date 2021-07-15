@@ -127,6 +127,9 @@
           
         }else if($_SESSION['tipo'] == 2){
           echo 'view/grupotrabajo/index.php';
+        }else if($_SESSION['tipo'] == 3){
+            
+          echo 'view/clientes/index.php';
         }
 		  
 		  

@@ -164,7 +164,7 @@ if ( !isset( $_SESSION[ 'tipo' ] ) || $_SESSION[ 'tipo' ] != 2 ) {
 						</li>
 					</ul>
 					
-					        <<script language=javascript>
+					        <script language=javascript>
 function finestraSecundaria (url){
 window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
 }
@@ -172,7 +172,7 @@ window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
 
 
 
-        <a class"btn btn-danger" href="javascript:finestraSecundaria('https://sistema.dpocolombia.org/view/chat/')">
+        <a class"btn btn-danger" href="javascript:finestraSecundaria('https://sistema.serempresarialgyp.com/view/chat/')">
             
             <img src="../../../img/icono_mens.png" width="55" />
             

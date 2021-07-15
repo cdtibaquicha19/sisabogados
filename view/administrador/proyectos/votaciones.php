@@ -191,12 +191,12 @@ if(isset($_POST['submit4'])){
 	if(db_query($query)){
 		
 $para      = $correos;
-$titulo    = 'Sistema  notificacion dpocolombia ';
+$titulo    = 'Sistema  notificacion ';
 $mensaje   = 'Se ha puesto a votacion un proyecto '.$nombre_proyecto.'
-  https://sistema.dpocolombia.org
+  https://sistema.bihaosas.co
 ';
-$cabeceras = 'From: info@dpocolombia' . "\r\n" .
-    'Reply-To: disenoweb@mandragoraproducciones.com.co' . "\r\n" .
+$cabeceras = 'From: info@bihaosas.co' . "\r\n" .
+    'Reply-To: soporte@bihaosas.co' . "\r\n" .
     'X-Mailer: PHP/' . phpversion();
 mail($para, $titulo, $mensaje, $cabeceras);
 header('Location: '.$_SERVER['HTTP_REFERER']);

@@ -2,7 +2,7 @@
 
 
     # Clase conexion: permite conectar a la base de datos y ejecutar consultas sql
-	$con = mysqli_connect("localhost","samuaeve_rootsis","@BH4gj*n3t,V","samuaeve_sistema");
+	$con = mysqli_connect("localhost","samuaeve_rootB","@BH4gj*n3t,V","samuaeve_sistemB");
 	mysqli_set_charset($con,'utf8'); 
 	
 
@@ -11,10 +11,10 @@
 
         # Atributos de la clase conexion
         private $mysqli = '';
-        private $usuario = 'samuaeve_rootsis';
+        private $usuario = 'samuaeve_rootB';
         private $clave = '@BH4gj*n3t,V';
         private $server = 'localhost';
-        private $db = 'samuaeve_sistema';
+        private $db = 'samuaeve_sistemB';
 
 
         # Funcion que permite conectarnos a la base de datos

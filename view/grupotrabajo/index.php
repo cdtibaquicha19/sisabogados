@@ -142,13 +142,13 @@
         </ul>
         <script language=javascript>
 function finestraSecundaria (url){
-window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
+window.open(url, "CHAT SISTEMA multiaccess", "width=900, height=600")
 }
 </script>
 
 
 
-        <a class"btn btn-danger" href="javascript:finestraSecundaria('https://sistema.dpocolombia.org/view/chat/')">
+        <a class"btn btn-danger" href="javascript:finestraSecundaria('https://sistema.serempresarialgyp.com/view/chat/')">
             
             <img src="../../../img/icono_mens.png" width="55" />
             

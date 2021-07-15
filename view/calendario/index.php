@@ -1,290 +1,283 @@
-<?php
-require_once('bdd.php');
-
-
-$sql = "SELECT * FROM proyectos ";
-
-$req = $bdd->prepare($sql);
-$req->execute();
-
-$events = $req->fetchAll();
-
+<?php 
+	include('includes/loader.php'); 
+	$_SESSION['token'] = time();
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<html lang="es">
+  <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <title>Calendario</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ajax Full Featured Calendar 2">
+    <meta name="author" content="Paulo Regina">
 
-    <title>Calendario madersolda</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-	
-	<!-- FullCalendar -->
-	<link href='css/fullcalendar.css' rel='stylesheet' />
-
-
-    <!-- Custom CSS -->
-    <style>
-    body {
-        padding-top: 70px;
-        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    }
-	#calendar {
-		max-width: 100%;
-			max-width: 1200px;
-	}
-	.col-centered{
-		float: none;
-		margin: 0 auto;
-	}
-    </style>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/smoothness/jquery-ui.css" rel="stylesheet">
+    <link href="css/fullcalendar.print.css" media="print" rel="stylesheet">
+    <link href="css/fullcalendar.css" rel="stylesheet">
+    <link href="lib/spectrum/spectrum.css" rel="stylesheet">    
+    <link href="lib/timepicker/jquery-ui-timepicker-addon.css" rel="stylesheet">
+	    
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-</head>
-
+  </head>
 <body>
-
-    <!-- Navigation -->
- 
-
-    <!-- Page Content -->
-    <div class="">
-
-        <div class="row">
-            <div class="col-lg-12 ">
-                
-                <div id="calendar" >
+  	
+    <!---------------------------------------------- CALENDAR MODALs ---------------------------------------------->
+    
+    <!-- Calendar Modal -->
+    <div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+          	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          	<h4 id="details-body-title"></h4>
+          </div>
+          <div class="modal-body">
+            
+            <div class="loadingDiv"></div>
+            
+            <!-- QuickSave/Edit FORM -->
+          	<form id="modal-form-body">
+            	<p>
+            		<label>Titulo: </label>
+                	<input class="form-control" name="title" value="" type="text">
+                </p>
+                <p>
+                	<label>Descripcion: </label>
+                	<textarea class="form-control" name="description"></textarea>
+                </p>
+                <p>
+                    <label>Categoria: </label>
+                    <select name="categorie" class="form-control">
+                        <?php 
+							foreach($calendar->getCategories() as $categorie) 
+							{
+								echo '<option value="'.$categorie.'">'.$categorie.'</option>';
+							}
+                        ?>
+                    </select>
+                </p>
+                <p>
+                	 <label>Color del evento :</label>
+                	 <input type="text" class="form-control input-sm" value="#587ca3" name="color" id="colorp">
+                </p>
+                <div class="pull-left mr-10">
+                	<p id="repeat-type-select">
+                	<label>Repetir:</label>
+                	<select id="repeat_select" name="repeat_method" class="form-control">
+                        <option value="no" selected>No</option>
+                        <option value="every_day">Cada dia </option>
+                        <option value="every_week">Cada semana </option>
+                        <option value="every_month">Cada mes </option>
+                	</select>
+                    </p>
                 </div>
+                <div class="pull-left">
+                	<p id="repeat-type-selected">
+                	<label>Veces:</label>
+                	<select id="repeat_times" name="repeat_times" class="form-control">
+                    	<option value="1" selected>1</option>
+						<?php
+                            for($i = 2; $i <= 30; $i++) {
+                                echo '<option value="'.$i.'">'.$i.'</option>';		
+                            }
+                        ?>
+                	</select>
+                    </p>
+                </div>
+                <div class="clearfix"></div>
+                <p id="event-type-select">
+                    <label>Tipo: </label>
+                    <select id="event-type" name="all-day" class="form-control">
+                        <option value="true">Hacer evento 24H (todo el día)</option>
+                        <option value="false">Hacer evento como deseo</option>
+                    </select>
+                </p>
+                <div id="event-type-selected">
+                	<div class="pull-left mr-10">
+                    	<p>
+                    	<label>Fecha de inicio:</label>
+                    	<input type="text" name="start_date" class="form-control input-sm" placeholder="Y-M-D" id="startDate">
+                        </p>
+                    </div>
+                    <div class="pull-left">
+                    	<p>
+                   		<label>Hora de inicio:</label>
+                    	<input type="text" class="form-control input-sm" name="start_time" placeholder="HH:MM" id="startTime">
+                        </p>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="pull-left mr-10">
+                    	<p>
+                    	<label>Fecha final:</label>
+                    	<input type="text" class="form-control input-sm" name="end_date" placeholder="Y-M-D" id="endDate">
+                        </p>
+                    </div>
+                    <div class="pull-left">
+                    	<p>
+                    	<label>Hora de finalización:</label>
+                    	<input type="text" class="form-control input-sm" name="end_time" placeholder="HH:MM" id="endTime">
+                        </p>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+				<div class="custom-fields">
+				<?php
+					$form->generate();
+				?>
+				</div>
+            </form>
+            
+            <!-- Modal Details -->
+            <div id="details-body">
+                <div id="details-body-content"></div>
             </div>
-			
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="export-event" class="btn btn-warning">Exportar</button>
+            <button type="button" id="delete-event" class="btn btn-danger">Eliminar</button>
+            <button type="button" id="edit-event" class="btn btn-info">Editar</button>
+            <button type="button" id="add-event" class="btn btn-primary">Añadir</button>
+            <button type="button" id="save-changes" class="btn btn-primary">Guardar</button>
+          </div>
         </div>
-        <!-- /.row -->
-		
-		<!-- Modal -->
-		<div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-			<div class="modal-content">
-			<form class="form-horizontal" method="POST" action="addEvent.php">
-			
-			  <div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Agregar  </h4>
-			  </div>
-			  <div class="modal-body">
-				
-				  <div class="form-group">
-					<label for="title" class="col-sm-2 control-label">Titulo</label>
-					<div class="col-sm-10">
-					  <input type="text" name="title" class="form-control" id="title" placeholder="Titulo" required>
-					</div>
-				  </div>
-				  <div class="form-group">
-					<label for="color" class="col-sm-2 control-label">Color</label>
-					<div class="col-sm-10">
-					  <input name="color" class="form-control" type="color" id="color">
-						  
-						 
-					</div>
-				  </div>
-				  <div class="form-group">
-					<label for="start" class="col-sm-2 control-label">Fecha inicio </label>
-					<div class="col-sm-10">
-					  <input type="datetime" name="start" class="form-control" id="start" >
-					</div>
-				  </div>
-				  <div class="form-group">
-					<label for="end" class="col-sm-2 control-label">fecha fin</label>
-					<div class="col-sm-10">
-					  <input type="datetime" name="end" class="form-control" id="end" >
-					</div>
-				  </div>
-				
-			  </div>
-			  <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-				<button type="submit" class="btn btn-primary">Guardar Cambios </button>
-			  </div>
-			</form>
-			</div>
-		  </div>
-		</div>
-		
-		
-		
-		<!-- Modal -->
-		<div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-			<div class="modal-content">
-			<form class="form-horizontal" method="POST" action="editEventTitle.php">
-			  <div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Fin de evento </h4>
-			  </div>
-			  <div class="modal-body">
-				
-				  <div class="form-group">
-					<label for="title" class="col-sm-2 control-label">Titulo</label>
-					<div class="col-sm-10">
-					  <input type="text" name="title" class="form-control" id="title" placeholder="Title">
-					</div>
-				  </div>
-				  <div class="form-group">
-					<label for="color" class="col-sm-2 control-label">Color</label>
-					<div class="col-sm-10">
-					  <input name="color" class="form-control" type="color" id="color">
-					</div>
-				  </div>
-				    <div class="form-group"> 
-						<div class="col-sm-offset-2 col-sm-10">
-						  <div class="checkbox">
-							<label class="text-danger"><input type="checkbox"  name="delete"> Borrar evento </label>
-						  </div>
-						</div>
-					</div>
-				  
-				  <input type="hidden" name="id" class="form-control" id="id">
-				
-				
-			  </div>
-			  <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar </button>
-				<button type="submit" class="btn btn-primary">Guardar cambios </button>
-			  </div>
-			</form>
-			</div>
-		  </div>
-		</div>
-
+      </div>
     </div>
-    <!-- /.container -->
-
-    <!-- jQuery Version 1.11.1 -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-	
-	<!-- FullCalendar -->
-	<script src='js/moment.min.js'></script>
-	<script src='js/fullcalendar.min.js'></script>
-	
-	<script>
-
-	$(document).ready(function() {
+    
+    <!-- Modal Delete Prompt -->
+    <div id="cal_prompt" class="modal fade">
+    	<div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+        	<a href="#" class="btn btn-danger" data-option="remove-this">Borrar esto</a>
+            <a href="#" class="btn btn-danger" data-option="remove-repetitives">Eliminar todos</a>
+        	<a href="#" class="btn btn-default" data-dismiss="modal">Cerrar</a>
+        </div>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Modal Edit Prompt -->
+    <div id="cal_edit_prompt_save" class="modal fade">
+    	<div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body-custom"></div>
+        <div class="modal-footer">
+        	<a href="#" class="btn btn-info" data-option="save-this">Guarda esto</a>
+            <a href="#" class="btn btn-info" data-option="save-repetitives">Salvar a todos</a>
+        	<a href="#" class="btn btn-default" data-dismiss="modal">Cerrar</a>
+        </div>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Import Modal -->
+    <div id="cal_import" class="modal fade">
+    	<div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-body-import" style="white-space: normal;">
+        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4>Importar Evento</h4>
+            
+        	<p class="help-block">Copie y pegue el código del evento de su archivo .ics, ábralo usando un editor de texto</p>
+            <textarea class="form-control" rows="10" id="import_content" style="margin-bottom: 10px;"></textarea>
+            <input type="button" class="pull-right btn btn-info" onClick="calendar.calendarImport()" value="Import" />
+        </div>
+        </div>
+        </div>
+    </div>
+    
+    <input type="hidden" name="cal_token" id="cal_token" value="<?php echo $_SESSION['token']; ?>" />
+    
+    <!---------------------------------------------- THEME ---------------------------------------------->
+    
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="navbar-brand" href="index.php"></a>
+				<!-- search (required if you want to have search) -->
+				<form class="pull-right form-inline" style="margin-top: 8px; margin-left: 20px;" id="search">
+					<div class="form-group">
+						<input class="form-control" type="text">
+						<button class="btn" type="button">Buscar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div><!-- .navbar -->
+  	
+	<div  style="margin-top: 80px;">
 		
-		$('#calendar').fullCalendar({
-			header: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'month,basicWeek,basicDay'
-			},
-			defaultDate:   new Date(),
-			editable: true,
-			eventLimit: true, // allow "more" link when too many events
-			selectable: true,
-			
-			selectHelper: true,
-			select: function(start, end) {
-				
-				$('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
-				$('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
-				$('#ModalAdd').modal('show');
-			},
-			eventRender: function(event, element) {
-				element.bind('dblclick', function() {
-					$('#ModalEdit #id').val(event.id);
-					$('#ModalEdit #title').val(event.title);
-					$('#ModalEdit #color').val(event.color);
-					$('#ModalEdit').modal('show');
-				});
-			},
-			eventDrop: function(event, delta, revertFunc) { // si changement de position
-
-				edit(event);
-				
-
-			},
-			eventResize: function(event,dayDelta,minuteDelta,revertFunc) { // si changement de longueur
-				edit(event);
-
-			},
-			events: [
-			<?php foreach($events as $event): 
-			
-				$start = explode(" ", $event['inicio']);
-				$end = explode(" ", $event['fin']);
-				if($start[1] == '00:00:00'){
-					$start = $start[0];
-				}else{
-					$start = $event['inicio'];
-				}
-				if($end[1] == '00:00:00'){
-					$end = $end[0];
-				}else{
-					$end = $event['fin'];
+      <a href="export.php" class="btn btn-warning pull-right" style="margin-right: 10px;">Exportar</a> 
+      <a href="#cal_import" class="btn btn-info pull-right" data-toggle="modal" style="margin-right: 10px;">Importar</a> 
+       
+      <div class="clearfix"></div>
+      
+      <!-- Filter by Category (required if you want to have categories filtering) -->
+      <?php if($calendar->getCategories() !== false) { ?>
+      <div id="cat-holder">
+      <form id="filter-category">
+          <select class="form-control input-sm" style="width: auto;">
+          	<?php
+				$selected = (isset($_SESSION['filter']) && $_SESSION['filter'] == 'all-fields' ? 'selected' : '');
+				echo '<option '.$selected.' value="all-fields">All</option>';
+				foreach($calendar->getCategories() as $categorie) 
+				{
+					$selectedLoop = (isset($_SESSION['filter']) && $_SESSION['filter'] == $categorie ? 'selected' : '');
+					echo '<option '.$selectedLoop.' value="'.$categorie.'">'.$categorie.'</option>';	
 				}
 			?>
-				
-				
-				{
-					id: '<?php echo $event['id']; ?>',
-					title: '<?php echo $event['nombre'] ?> ',
-					start: '<?php echo $start; ?>',
-					end: '<?php echo $end; ?>',
-					color: '<?php echo $event['color']; ?>',
-				},
-			<?php endforeach; ?>
-			]
+          </select>
+      </form>
+      </div>
+      <?php } ?>
+        
+      <div class="box">
+        <div class="header"><h4>Calendario</h4></div>
+        <div class="content"> 
+            <div id="calendar"></div>
+        </div> 
+    </div>
+
+    </div> <!-- /container -->
+  
+	<script src="lib/moment.js"></script>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/jquery-ui.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/fullcalendar.js"></script>
+    <script src="js/lang-all.js"></script>
+    <script src="js/jquery.calendar.js"></script>
+	<script src="lib/spectrum/spectrum.js"></script>
+    
+    <script src="lib/timepicker/jquery-ui-sliderAccess.js"></script>
+    <script src="lib/timepicker/jquery-ui-timepicker-addon.min.js"></script>
+    
+    <script src="js/custom.js"></script>
+    
+	<script src="js/g.map.js"></script>
+    <script src="http://maps.google.com/maps/api/js" defer></script>
+	
+    <!-- call calendar plugin -->
+    <script type="text/javascript">
+		$().FullCalendarExt({
+			calendarSelector: '#calendar',
+			lang: 'es'
 		});
-		
-		function edit(event){
-			start = event.start.format('YYYY-MM-DD HH:mm:ss');
-			if(event.end){
-				end = event.end.format('YYYY-MM-DD HH:mm:ss');
-			}else{
-				end = start;
-			}
-			
-			id =  event.id;
-			
-			Event = [];
-			Event[0] = id;
-			Event[1] = start;
-			Event[2] = end;
-			
-			$.ajax({
-			 url: 'editEventDate.php',
-			 type: "POST",
-			 data: {Event:Event},
-			 success: function(rep) {
-					if(rep == 'OK'){
-						
-						alert('Guardado');
-					}else{
-						alert(' error intene nuevamente .'); 
-					}
-				}
-			});
-		}
-		
-	});
-
-</script>
-
+	</script>
+    
 </body>
-
 </html>

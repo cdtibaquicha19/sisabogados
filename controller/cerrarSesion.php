@@ -8,7 +8,7 @@
 
 echo'<script> 
 <!--
-window.location.replace("https://www.sistema.mandragoraproducciones.com.co"); 
+window.location.replace("/index.php"); 
 -->
 </script>';
  
