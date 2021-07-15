@@ -50,14 +50,14 @@ if (isset($_SESSION['id'])) {
   <div class="container">
     <div style="margin-top: 150px;" class="row">
       <div class=" col-md-6 " >
-      <img width="100%" class="img-responsive" src="img/logo joaking curvas.png">
-      <legend class="center">Sistema gestion V 3.0</legend>
+      
+  
 
       <img width="100%" class="img-responsive" src="img/login.png">
 
 
       </div>
-      <div style="background-color: #182D4C; padding: 30px; border-radius: 15px; margin-top: 170px;" class=" col-md-6 ">
+      <div style="background-color: #182D4C; padding: 30px; border-radius: 15px;" class=" col-md-6 ">
         <!-- Margen superior (css personalizado )-->
 
         <!-- Estructura del formulario -->
@@ -65,7 +65,10 @@ if (isset($_SESSION['id'])) {
 
           
 
-          <div class="alert alert-info" role="alert">Notas de version V 3.0
+          <div class="alert alert-info" role="alert">
+          <legend class="center">Sistema gestion V 3.0</legend>
+          
+          Notas de version V 3.0
 
             <ul>
 
