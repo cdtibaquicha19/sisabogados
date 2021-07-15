@@ -25,14 +25,6 @@
         # Llamamos al metodo login para validar los datos en la base de datos
         $usuario -> registroUsuario($name, $email, $clave);
        
-         
-		echo '<script type="application/javascript">
-
-      window.location.replace("http://nuevapagina.php/");
-   
-    
-      </script>
-      ' ;
 
       }else{
         echo 'error_4';
