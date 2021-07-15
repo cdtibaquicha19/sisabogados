@@ -63,7 +63,7 @@
 
             <legend class="center">Sistema gestion V 3.0</legend>
             
-            <div class="alert alert-info" role="alert">Notas de version V1.5
+            <div class="alert alert-info" role="alert">Notas de version V3.0
             
             <ul>
            
