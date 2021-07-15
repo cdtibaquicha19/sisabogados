@@ -1,0 +1,1 @@
+[14-Jul-2021 20:39:16 UTC] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, bool given in /home/samuaeve/sistema.bufeteabogadoshs.com/model/conexion.php on line 48
