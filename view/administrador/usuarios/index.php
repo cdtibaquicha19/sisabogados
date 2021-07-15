@@ -28,9 +28,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 	<div class="wrapper">
 
 		<div class="header_bar">
-
 			<div class="brand">
-
 				<div class="logo" style="display:block"><span class="theme_color">ADMINISTRADOR</span> </div>
 			</div>
 			<!--\\\\\\\ brand end \\\\\\-->
@@ -38,9 +36,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 				<!--\\\\\\\ header top bar start \\\\\\-->
 				<a href="javascript:void(0);" class="menutoggle"> <i class="fa fa-bars"></i> </a>
 				<div class="top_left">
-
 				</div>
-
 				<div class="top_right_bar">
 					<div class="top_right">
 						<div class="top_right_menu">
@@ -67,17 +63,9 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 
 										?>
 
-
-
 									</ul>
 
-
-
-
 								</li>
-
-
-
 							</ul>
 						</div>
 					</div>
@@ -91,8 +79,6 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 									<li> <a href="../../../controller/cerrarSesion.php"><i class="fa fa-power-off"></i> Cerrar sesion</a> </li>
 								</ul>
 					</div>
-
-
 				</div>
 			</div>
 
@@ -133,7 +119,6 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 								</span> <span class="plus"><i class="fa fa-plus"></i></span>
 							</a>
 
-
 						</li>
 					</ul>
 					<script language=javascript>
@@ -141,8 +126,6 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 							window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
 						}
 					</script>
-
-
 
 					<a class="btn btn-danger" href="javascript:finestraSecundaria('https://sistema.serempresarialgyp.com/view/chat/')">
 
@@ -153,19 +136,11 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 					<span class="badge badge color_2">
 						<?php
 
-
-
 						$datos2 = mysqli_query($con, "SELECT * from chat where reciever_userid ='" . $_SESSION['idusuario'] . "' and status = '1'");
-
-
 						$numero = mysqli_num_rows($datos2);
-
 						echo $numero;
-
 						?>
 					</span>
-
-
 				</div>
 			</div>
 			<!--\\\\\\\left_nav end \\\\\\-->
@@ -175,9 +150,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 					<div class="pull-left page_title theme_color">
 						<h1>USUARIOS
 							</a></h1>
-
 					</div>
-
 				</div>
 				<div class="container clear_both padding_fix">
 					<!--\\\\\\\ container  start \\\\\\-->
@@ -188,8 +161,6 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 								<div class="header">
 
 									<h3 class="content-header">Listado de usuarios creados</h3>
-
-
 									<!-- Button trigger modal -->
 									<button type="button" class="btn btn-primary" style="float: right;margin-top:-35px;  " data-toggle="modal" data-target="#myModal">
 										Crear nuevo usuario <strong>+</strong>
@@ -235,7 +206,6 @@ swal("Se ha creado el usuario : ","' . $nombre . '","success")
 .then((value) => {
 location = location;
 });
-
 	</script>
 	';
 														} else {
@@ -280,7 +250,7 @@ location = location;
 																		<select name="tipo" class="form-control">
 
 																			<option value="1">Administrador</option>
-																			<option value="2">Grupo de trabajo</option>
+																			<option value="2">Abogado</option>
 																			<option value="3">Cliente</option>
 
 																		</select>
@@ -307,8 +277,6 @@ location = location;
 
 																		<select name="departamento[]" multiple="multiple" class="form-control">
 
-
-
 																			<?php
 																			include("../../model/function.php");
 
@@ -327,8 +295,6 @@ location = location;
 
 																			?>
 																		</select>
-
-
 																	</div>
 																</div>
 																<div class="form-group">
@@ -337,27 +303,14 @@ location = location;
 																		<select name="estado" class="form-control">
 																			<option value="1">Activo</option>
 																			<option value="0">Desactivado</option>
-
-
-
 																		</select>
 
 																	</div>
 																</div>
 
-
-
-
-
 															</div>
 
-
-
-
 														</div>
-
-
-
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -380,7 +333,6 @@ location = location;
 													<th>USUARIO</th>
 													<th>DEPARTAMENTO</th>
 													<th width="15%">ACCIONES</th>
-
 												</tr>
 											</thead>
 											<tbody>
@@ -398,8 +350,6 @@ location = location;
 														<td><?php echo $row->departamento; ?></td>
 
 														<td>
-
-
 															<a class="btn btn-primary" href="editarcom.php?id=<?php echo $row->idusuario; ?>"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
 															<a class="btn btn-danger" href="borrar.php?id=<?php echo $row->idusuario; ?>">Eliminar</a>
 
@@ -413,8 +363,6 @@ location = location;
 									<!--/table-responsive-->
 								</div>
 								<!--/porlets-content-->
-
-
 							</div>
 						</div>
 					</div>
@@ -439,5 +387,4 @@ location = location;
 	<script src="../../componentes/js/jPushMenu.js"></script>
 	<script src="../../componentes/js/side-chats.js"></script>
 </body>
-
 </html>

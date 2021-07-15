@@ -48,21 +48,24 @@ if (isset($_SESSION['id'])) {
 
   <!-- Formulario Login -->
   <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-md-4 col-md-offset-4">
+    <div style="margin-top: 150px;" class="row">
+      <div class=" col-md-6 " >
+      <img width="100%" class="img-responsive" src="img/logo joaking curvas.png">
+      <legend class="center">Sistema gestion V 3.0</legend>
+
+      <img width="100%" class="img-responsive" src="img/login.png">
+
+
+      </div>
+      <div style="background-color: #182D4C; padding: 30px; border-radius: 15px; margin-top: 170px;" class=" col-md-6 ">
         <!-- Margen superior (css personalizado )-->
 
-        <div class="spacing-1">
-          <img width="100%" class="img-responsive" src="img/logo joaking curvas.png">
-
-
-        </div>
         <!-- Estructura del formulario -->
         <fieldset>
 
-          <legend class="center">Sistema gestion V 3.0</legend>
+          
 
-          <div class="alert alert-info" role="alert">Notas de version V3.0
+          <div class="alert alert-info" role="alert">Notas de version V 3.0
 
             <ul>
 
@@ -100,7 +103,7 @@ if (isset($_SESSION['id'])) {
               <img src="img/load.gif" width="100%" alt="">
             </div>
             <div class="col-xs-12 center text-accent">
-              <span>Validando información...</span>
+              <span> Validando información... </span>
             </div>
           </div>
           <!-- Fin load -->
@@ -109,9 +112,8 @@ if (isset($_SESSION['id'])) {
           <div class="row">
             <div class="col-xs-8 col-xs-offset-2">
               <div class="spacing-2"></div>
-              <button style="background-color: #182D4C
-" type="button" class="btn btn-primary " name="button" id="login">Iniciar sesion</button>
-<a href="registro.php" type="button" class="btn btn-default " name="button" >Registrarse</a>
+              <button type="button" class="btn btn-primary btn-lg " name="button" id="login">Iniciar sesion</button>
+<a href="registro.php" type="button" class="btn btn-default btn-lg " name="button" >Registrarse</a>
             </div>
           </div>
 
