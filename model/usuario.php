@@ -160,7 +160,7 @@
         echo 'error_3';
       }else{
 
-        parent::query('insert into usuarios(nombre,correo,usuario, clave, status, tipo) values("'.$name.'", "'.$email.'","'.$email.'", MD5("'.$clave.'"),1,2)');
+        parent::query('insert into usuarios(nombre,correo,usuario, clave, status, tipo) values("'.$name.'", "'.$email.'","'.$email.'", base64_encode("'.$clave.'"),1,2)');
 
         session_start();
 
