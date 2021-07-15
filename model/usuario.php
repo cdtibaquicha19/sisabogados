@@ -160,9 +160,9 @@
         echo 'error_3';
       }else{
 
-        base64_encode($clave);
+        $clave2 = base64_encode($clave);
 
-        parent::query('insert into usuarios(nombre,correo,usuario, clave, status, tipo) values("'.$name.'", "'.$email.'","'.$email.'", "'.$clave.'",1,2)');
+        parent::query('insert into usuarios(nombre,correo,usuario, clave, status, tipo) values("'.$name.'", "'.$email.'","'.$email.'", "'.$clave2.'",1,2)');
 
         session_start();
 
