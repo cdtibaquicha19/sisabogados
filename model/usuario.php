@@ -164,14 +164,14 @@
         echo 'error_3';
       }else{
 
-        parent::query('insert into usuarios(nombre, correo, clave, tipo) values("'.$name.'", "'.$email.'", MD5("'.$clave.'"), 2)');
+        parent::query('insert into usuarios(nombre, correo,usuario clave, tipo) values("'.$name.'", "'.$email.'","'.$email.'", MD5("'.$clave.'"), 2)');
 
         session_start();
 
         $_SESSION['nombre'] = $name;
         $_SESSION['tipo']  = 2;
 
-        echo 'view/user/index.php';
+        echo 'view/grupotrabajo/index.php';
 
       }
 
