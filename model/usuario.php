@@ -128,13 +128,9 @@
         }else if($_SESSION['tipo'] == 2){
           echo 'view/grupotrabajo/index.php';
         }else if($_SESSION['tipo'] == 3){
-            
           echo 'view/clientes/index.php';
         }
 		  
-		  
-
-
         // u.u finalizamos aqui :v
 
       }else{
@@ -164,11 +160,11 @@
         echo 'error_3';
       }else{
 
-        parent::query('insert into usuarios(nombre,correo,usuario, clave, tipo) values("'.$name.'", "'.$email.'","'.$email.'", MD5("'.$clave.'"), 2)');
+        parent::query('insert into usuarios(nombre,correo,usuario, clave, status, tipo) values("'.$name.'", "'.$email.'","'.$email.'", MD5("'.$clave.'"),1,2)');
 
         session_start();
 
-        $_SESSION['nombre'] = $name;
+        $_SESSION['correo'] = $email;
         $_SESSION['tipo']  = 2;
 
         echo 'view/grupotrabajo/index.php';
