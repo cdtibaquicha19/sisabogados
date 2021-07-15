@@ -61,7 +61,7 @@
           <fieldset>
 			 
 
-            <legend class="center">Sistema gestion V 2.0</legend>
+            <legend class="center">Sistema gestion V 3.0</legend>
             
             <div class="alert alert-info" role="alert">Notas de version V1.5
             
