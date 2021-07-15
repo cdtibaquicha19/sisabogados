@@ -340,7 +340,7 @@ function mostrarPassword(){
 
 <script type="text/javascript">
 function mostrarPassword(){
- var cambio = document.getElementById("clave);
+ var cambio = document.getElementById("clave");
  if(cambio.type == "password"){
  cambio.type = "text";
  $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');

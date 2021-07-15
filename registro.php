@@ -57,10 +57,10 @@
 
 
               <!-- Caja de texto para usuario -->
-              <label class="sr-only" for="user">Nombre</label>
+              <label class="sr-only" for="user">Ingresa Nombre completo </label>
               <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                <input type="text" class="form-control" name="name" placeholder="Ingresa tu nombre">
+                <input type="text" class="form-control" name="name" placeholder="Ingresa Nombre completo">
               </div>
 
               <!-- Div espaciador -->
@@ -108,7 +108,9 @@
               <div class="row">
                 <div class="col-xs-8 col-xs-offset-2">
                   <div class="spacing-2"></div>
-                  <button type="button" class="btn btn-primary btn-block" name="button" id="registro">Registrate</button>
+                  <a href="index.php" type="button" class="btn btn-default" name="button" id="login">Iniciar sesion</a>
+                  <button  style="background-color: #182D4C
+" type="button" class="btn btn-primary " name="button" id="registro">Registrarse</button>
                 </div>
               </div>
 

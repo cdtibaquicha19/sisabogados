@@ -98,9 +98,9 @@
         $_SESSION['usuario'] = $user['usuario'];
         $_SESSION['tipo']  = $user['tipo'];
 		  
-		  $_SESSION['departamento']  = $user['departamento'];
-		   $_SESSION['correo']  = $user['correo'];
-		  $_SESSION['creado_por']  = $user['creado_por'];
+		    $_SESSION['departamento']  = $user['departamento'];
+		    $_SESSION['correo']  = $user['correo'];
+		    $_SESSION['creado_por']  = $user['creado_por'];
 
         /*
           Que porqué almacenamos cargo? es encillo en nuestros proyectos
@@ -165,18 +165,16 @@
         parent::query('insert into usuarios(nombre,correo,usuario, clave, status, tipo) values("'.$name.'", "'.$email.'","'.$email.'", "'.$clave2.'",1,2)');
 
         session_start();
-
+      
         $_SESSION['correo'] = $email;
         $_SESSION['tipo']  = 2;
 
         echo 'view/grupotrabajo/index.php';
+        
 
       }
-
+     
       parent::cerrar();
     }
 
-  }
-
-
-?>
+  };
