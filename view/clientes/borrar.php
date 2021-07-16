@@ -3,8 +3,7 @@ include("../../model/function.php");
 $id = $_GET['id'];
 delete('solicitudcertificacion','idsolicitud',$id);
 header("location:index.php");
-
-write_log();
+;
 
 function write_log($cadena,$tipo)
 {

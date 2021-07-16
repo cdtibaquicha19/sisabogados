@@ -49,11 +49,11 @@ if (isset($_SESSION['id'])) {
   <!-- Formulario Login -->
   <div class="container">
     <div style="margin-top: 150px;" class="row">
-      <div class=" col-md-6 " >
-      
-  
+      <div class=" col-md-6 ">
 
-      <img width="100%" class="img-responsive" src="img/login.png">
+
+
+        <img width="100%" class="img-responsive" src="img/login.png">
 
 
       </div>
@@ -63,12 +63,12 @@ if (isset($_SESSION['id'])) {
         <!-- Estructura del formulario -->
         <fieldset>
 
-          
+
 
           <div class="alert alert-info" role="alert">
-          <legend class="center">Sistema gestion V 3.0</legend>
-          
-          Notas de version V 3.0
+            <legend class="center">Sistema gestion V 3.0</legend>
+
+            Notas de version V 3.0
 
             <ul>
 
@@ -116,7 +116,7 @@ if (isset($_SESSION['id'])) {
             <div class="col-xs-8 col-xs-offset-2">
               <div class="spacing-2"></div>
               <button type="button" class="btn btn-primary btn-lg " name="button" id="login">Iniciar sesion</button>
-<a href="registro.php" type="button" class="btn btn-default btn-lg " name="button" >Registrarse</a>
+              <a href="registro.php" type="button" class="btn btn-default btn-lg " name="button">Registrarse</a>
             </div>
           </div>
 

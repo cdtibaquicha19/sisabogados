@@ -28,7 +28,6 @@
 <link href="../componentes/plugins/advanced-datatable/css/demo_table.css" rel="stylesheet" />
 <link href="../componentes/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet" />
 
-<script id="cid0020000215988100783" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 200px;height: 300px;">{"handle":"joa-king","arch":"js","styles":{"a":"707070","b":100,"c":"FFFFFF","d":"FFFFFF","k":"707070","l":"707070","m":"707070","n":"FFFFFF","p":"10","q":"707070","r":100,"ab":false,"pos":"br","cv":1,"cvbg":"808080","cvw":200,"cvh":30,"surl":0,"allowpm":0,"ticker":1,"fwtickm":1}}</script>
 </head>
 <body class="dark_theme  fixed_header left_nav_fixed">
 <div class="wrapper">
@@ -37,7 +36,7 @@
    
     <div class="brand">
       
-      <div class="logo" style="display:block"><span class="theme_color">COMERCIAL</span> </div>
+      <div class="logo" style="display:block"><span class="theme_color">DASHBOARD </span> </div>
       <div class="small_logo" style="display:none"><img src="images/s-logo.png" width="50" height="60" alt="s-logo" /> <img src="images/r-logo.png" width="122" height="20" alt="r-logo" /></div>
     </div>
     <!--\\\\\\\ brand end \\\\\\-->
@@ -203,7 +202,7 @@ echo '<script type="text/javascript">
 		
 	}
 		if(isset($_POST['submit2'])){
-		$field = array("estado"=>Revision);
+		$field = array("estado"=>'Revision');
 		$tbl = "solicitudcertificacion";
 		edit($tbl,$field,'idsolicitud',$id);
 		

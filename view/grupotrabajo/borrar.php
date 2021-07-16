@@ -4,8 +4,6 @@ $id = $_GET['id'];
 delete('solicitudcertificacion','idsolicitud',$id);
 header("location:index.php");
 
-write_log();
-
 function write_log($cadena,$tipo)
 {
 	$arch = fopen(realpath( '.' )."/logs/milog_".date("Y-m-d").".txt", "a+"); 

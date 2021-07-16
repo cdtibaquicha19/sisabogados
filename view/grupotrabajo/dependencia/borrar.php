@@ -5,5 +5,3 @@ if(delete('usuarios','idusuario',$id)){
 }else{
     	header("Location: index.php");
 }
-
-?>
