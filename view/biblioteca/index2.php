@@ -27,7 +27,7 @@
    
     <div class="brand">
       
-		<div class="logo" style="display:block"><span class="theme_color">GRUPO DE TRABAJO</span> </div>
+		<div class="logo" style="display:block"><span class="theme_color">DASHBOARD</span> </div>
     </div>
     <!--\\\\\\\ brand end \\\\\\-->
     <div class="header_top_bar">
@@ -80,23 +80,12 @@
         <ul>
           
           
-          <li> <a href="../grupotrabajo/index.php"> <i class="fa fa-tasks"></i>CALENDARIO
+          <li> <a href="../grupotrabajo/index.php"> <i class="fa fa-tasks"></i>SOLICITUDES
 			   
 			  <span class="plus"><i class="fa fa-plus"></i></span></a>
             
           </li>
-          <li> <a href="../grupotrabajo/proyectos/index.php"> <i class="fa fa-tasks"></i>PROYECTOS
-			  <span class="badge badge color_2" style="float: right">
-				   
-			<?php
-				  $datos = mysqli_query($con,"SELECT * from proyectos ") ;
-				  $numero = mysqli_num_rows($datos);
-				  echo $numero ; 
-			  ?>
-		    </span> 
-			  <span class="plus"><i class="fa fa-plus"></i></span></a>
-            
-          </li>
+    
 		
 		<li class="left_nav_active theme_border"> <a href="index2.php"> <i class="fa fa-bookmark"></i>
 			BIBLIOTECA 
@@ -117,9 +106,9 @@ window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
 
 
 
-        <a class"btn btn-danger" href="javascript:finestraSecundaria('https://sistema.serempresarialgyp.com/view/chat/')">
+        <a class="btn " href="javascript:finestraSecundaria('../chat/')">
             
-            <img src="../../../img/icono_mens.png" width="55" />
+            <img src="../../img/icono_mens.png" width="55" />
             
             Iniciar chat </a>
             
@@ -147,7 +136,7 @@ window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
       <!--\\\\\\\ contentpanel start\\\\\\-->
       <div class="pull-left breadcrumb_admin clear_both">
         <div class="pull-left page_title theme_color">
-          <h1>BIBLIOTECA -<?php echo strtoupper ($_SESSION['departamento']); ?>
+          <h1 style="color : #182d4c">BIBLIOTECA -<?php echo strtoupper ($_SESSION['departamento']); ?>
 			  
     		</a>
 			</h1>
@@ -173,6 +162,13 @@ window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
 	?>
    
    		<?php 
+       if($_SESSION['departamento']==""){
+         echo "no existen dependencias";
+
+       }else{
+         
+        echo "si existe ";
+       };
 			
 if(stristr($_SESSION['departamento'], $row2->nombre_depa)){
 			
