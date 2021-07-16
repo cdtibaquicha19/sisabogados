@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="css/style.css">
 
   </head>
-  <body>
+  <body style="font-family: source sans pro; font-size: 17px;">
 
     <!--
       Las clases que utilizo en los divs son propias de Bootstrap
@@ -45,8 +45,16 @@
 
     <!-- Formulario Login -->
     <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-md-4 col-md-offset-4">
+    <div style="margin-top: 150px;" class="row">
+      <div class="col-md-6 ">
+
+      <h1 style="color: #182D4C; font-size: 35px;">Formulario registro</h1>
+        <p style="text-align: justify; padding-right: 15px;">Ingresa a nuestro sistema de gestión de solicitudes para nuestros clientes , en el cual podrás encontrar la mejor gestión de caso de una forma personalizada y directa con nosotros ,para lo cual se deben diligenciar los campos de registro y recibirás un correo con la confirmación de los datos de acceso.</p>
+        <a href="index.php" type="button" class="btn btn-default btn-lg" name="button" id="login">Iniciar sesion</a>
+           <img width="100%" class="img-responsive" src="img/registro.png">
+      </div>
+      
+      <div style="margin-top: 50px ; background-color: #182D4C; padding: 30px; border-radius: 15px;" class=" col-md-6 ">
           <!-- Margen superior (css personalizado )-->
           <div class="spacing-1"></div>
 
@@ -108,9 +116,9 @@
               <div class="row">
                 <div class="col-xs-8 col-xs-offset-2">
                   <div class="spacing-2"></div>
-                  <a href="index.php" type="button" class="btn btn-default" name="button" id="login">Iniciar sesion</a>
+                  
                   <button  style="background-color: #182D4C
-" type="button" class="btn btn-primary " name="button" id="registro">Registrarse</button>
+" type="button" class="btn btn-primary btn-lg " name="button" id="registro">Registrarse</button>
                 </div>
               </div>
 
