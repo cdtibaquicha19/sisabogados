@@ -171,7 +171,7 @@ window.open(url, "CHAT SISTEMA", "width=900, height=600")
 
 
 
-        <a class"btn btn-danger" href="javascript:finestraSecundaria('https://sistema.serempresarialgyp.com/view/chat/')">
+        <a class ="btn" href="javascript:finestraSecundaria('https://sistema.serempresarialgyp.com/view/chat/')">
             
             <img src="../../../img/icono_mens.png" width="55" />
             
@@ -224,12 +224,12 @@ window.open(url, "CHAT SISTEMA", "width=900, height=600")
 										<table class="display table table-bordered table-striped" id="dynamic-table">
 											<thead>
 												<tr>
-													<th>NOMBRE DEL PROYECTO </th>
-													<th>DESCRIPCION</th>
-													<th>ULTIMA VEZ ACTUALIZADO</th>
+													<th>NOMBRE DEL SOLICITANTE</th>
+													<th>DESCRIPCION CASO</th>
+													<th>FECHA DE CREACION </th>
 
-													<th>INICIO</th>
-													<th>FINALIZACION</th>
+													<th>TELEFONO</th>
+													<th>CORREO</th>
 													<th width="15%">ACCIONES</th>
 
 												</tr>
@@ -237,27 +237,27 @@ window.open(url, "CHAT SISTEMA", "width=900, height=600")
 											<tbody>
 <?php 
 
-	$sql = "select * from calendar where category ='Proyectos' ";
+	$sql = "select * from proyectos  ";
 	$result = db_query($sql);
 	while($row = mysqli_fetch_object($result)){
 	?>
 												<tr>
 													<td>
 														<strong>
-															<?php echo $row->title;?>
+															<?php echo $row->nombre;?>
 														</strong>
 													</td>
 													<td width="25%">
-														<?php echo $row->description;?>
+														<?php echo $row->descripcion;?>
 													</td>
 													<td>
-														<?php echo $row->actualizado;?>
+														<?php echo $row->inicio;?>
 													</td>
 													<td>
-														<?php echo $row->start;?>
+														<?php echo $row->telefono;?>
 													</td>
 													<td>
-														<?php echo $row->end;?>
+														<?php echo $row->creado_por;?>
 													</td>
 													<td>
 

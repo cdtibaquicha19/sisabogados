@@ -186,6 +186,9 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2) {
 					<div class="pull-left page_title theme_color">
 						<h1 style="color : #182d4c">Tus Solicitudes
 							</a></h1>
+							<button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#myModal">
+										Crear nuevo caso <strong>+</strong>
+									</button>
 
 					</div>
 				</div>
@@ -197,10 +200,9 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2) {
 							<div class="block-web">
 								<div class="header">
 
+
 									<h3 class="content-header">Listado de casos creados </h3>
-									<button type="button" class="btn btn-primary" style="float: right;margin-top:-35px;  " data-toggle="modal" data-target="#myModal">
-										Crear nuevo caso <strong>+</strong>
-									</button>
+								
 
 
 									<!-- Modal -->
@@ -219,37 +221,25 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2) {
 													if (!empty($_POST['submit2'])) {
 														$fecha = date("m-d-y");
 														$psswd = substr(md5(microtime()), 1, 10);
-														echo ($psswd);
+												
 														$valor = $_SESSION['creado_por'];
 														$field = array(
 															"nombre" => $_POST['nombre'],
-															"correo" => $_POST['correo'],
-															"usuario" => $_POST['correo'],
-															"clave" => base64_encode($psswd),
-															"perfil_profesional" => $_POST['perfil'],
-															"departamento" => $_POST['departamento'],
-															"status" => $_POST['estado'],
-															"tipo" => "6",
-															"fregistro" => $fecha,
-															"creado_por" => $valor,
-															"dependencia" => $_POST['dependencia'],
+															"objetivos" => $_POST['ciudad'],
+															"telefono" => $_POST['telefono'],
+															"descripcion" => $_POST['caso'],
+															"inicio" => $fecha,
+															"creado_por" => $_SESSION['correo'],
+															
 														);
-														$tbl = "usuarios";
-														$nombre = $_POST['dependencia'];
+														$tbl = "proyectos";
+			
 
 														if (insert($tbl, $field)) {
-															$field2 = array(
-																"nombre_dep" => $_POST['dependencia'],
-																"encargado" => $_POST['nombre'],
-																"correo_dep" => $_POST['correo'],
-																"clave_dep" => base64_encode($psswd)
-															);
-															$tbl2 = "dependencias";
-															echo $field2;
-															insert($tbl2, $field2);
+															echo $sql ;
 
-															$to = $_POST['correo'];
-															$subject = "Creacion y asignacion de dependencia";
+															$to = $_SESSION['correo'];
+															$subject = "Creacion correcta de caso ";
 															$headers = "MIME-Version: 1.0" . "\r\n";
 															$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
@@ -288,7 +278,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2) {
 														} else {
 															echo '<script type="application/javascript">
 																	
-																			swal("No fue posible crear la dependencia ","' . $nombre . '","error")
+																			swal("No fue posible crear el caso ","' . $nombre . '","error")
 																			.then((value) => {
 																			location = location;
 																			});
@@ -301,96 +291,44 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2) {
 													<form action=" " method="post">
 
 														<div class="row">
-															<div class="col-md-6">
+															<div class="col-md-12">
 																<div class="form-group">
-																	<label for="inputEmail3" class="col-sm-12 control-label">Nombre de dependencia</label>
-																	<div class="col-sm-12">
-																		<input type="text" class="form-control" name="dependencia" placeholder="">
-																	</div>
-																</div>
-																<div class="form-group">
-																	<label for="inputEmail3" class="col-sm-12 control-label">Encargado</label>
+																	<label for="inputEmail3" class="col-sm-12 control-label">Nombre completo</label>
 																	<div class="col-sm-12">
 																		<input type="text" class="form-control" name="nombre" placeholder="">
 																	</div>
 																</div>
-																<div class="form-group hidden">
-																	<label for="inputEmail3" class="col-sm-12 control-label">Perfil profesional </label>
+																<div class="form-group">
+																	<label for="inputEmail3" class="col-sm-12 control-label">Ciudad</label>
 																	<div class="col-sm-12">
-																		<input type="text" class="form-control" name="perfil" placeholder="">
+																		<input type="text" class="form-control" name="ciudad" placeholder="">
 																	</div>
 																</div>
-																<div class="form-group hidden">
+																<div class="form-group">
+																	<label for="inputEmail3" class="col-sm-12 control-label">Telefono de contacto </label>
+																	<div class="col-sm-12">
+																		<input type="text" class="form-control" name="telefono" placeholder="">
+																	</div>
+																</div>
+																<div class="form-group">
+																	<label for="inputEmail3" class="col-sm-12 control-label">Describe tu caso  </label>
+																	<div class="col-sm-12">
+																		<textarea rows="10" class="form-control" name="caso" placeholder=""></textarea>
+																	</div>
+																</div>
+																<div class="form-group ">
 																	<label for="inputEmail3" class="col-sm-12 control-label">Usuario </label>
 																	<div class="col-sm-12">
 																		<input type="text" class="form-control" name="usuario" placeholder="">
 																	</div>
 																</div>
-																<div class="form-group">
-																	<label for="inputEmail3" class="col-sm-12 control-label">Tipo de usuario </label>
-																	<div class="col-sm-12">
-																		<select name="tipo" class="form-control">
-
-																			<option value="1">Administrador</option>
-																			<option value="2">Grupo de trabajo</option>
-
-
-																		</select>
-																	</div>
-																</div>
+																
 															</div>
-															<div class="col-md-6">
-																<div class="form-group">
-																	<label for="inputEmail3" class="col-sm-12 control-label">Correo</label>
-																	<div class="col-sm-12">
-																		<input type="email" class="form-control" name="correo" placeholder="">
-																	</div>
-																</div>
-																<div class="form-group hidden">
-																	<label for="inputEmail3" class="col-sm-12 control-label">Contrase�0�9a</label>
-																	<div class="col-sm-12">
-																		<input type="text" class="form-control" name="password" placeholder="">
-																	</div>
-																</div>
-																<div class="form-group hidden">
-																	<label for="inputEmail3" class="col-sm-12 control-label">Departamento</label>
-																	<div class="col-sm-12">
-
-																		<select name="departamento" class="form-control">
-																			<option value="Administracion">Administracion</option>
-																			<option value="Juridico">Juridico</option>
-																			<option value="financiero">financiero</option>
-																			<option value="Control de gestion">Control de gestion</option>
-																			<option value="Tesoreria">Tesoreria</option>
-																			<option value="Recursos humanos">Recursos humanos</option>
-																			<option value="Marketing">Marketing</option>
-																			<option value="Publicidad">Publicidad</option>
-																			<option value="Sistema y tecnologia">Sistema y tecnologia</option>
-																			<option value="Informatica">Informatica</option>
-																			<option value="Direccion o gerencia">Dirección o gerencia</option>
-
-																		</select>
-																	</div>
-																</div>
-																<div class="form-group">
-																	<label for="inputEmail3" class="col-sm-12 control-label">Estado</label>
-																	<div class="col-sm-12">
-																		<select name="estado" class="form-control">
-																			<option value="1">Activo</option>
-																			<option value="0">Desactivado</option>
-
-
-
-																		</select>
-
-																	</div>
-																</div>
-															</div>
-
+															
 														</div>
 														<div class="modal-footer">
-															<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-															<input class="btn-primary btn" name="submit2" type="submit" value="Crear dependencia ">
+															<button type="button" class="btn-lg btn-danger" data-dismiss="modal">Cerrar</button>
+															<input class="btn-primary btn-lg" name="submit2" type="submit" value="Crear solicitud ">
 
 													</form>
 												</div>
@@ -410,12 +348,9 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2) {
 										<table class="display table table-bordered table-striped" id="dynamic-table">
 											<thead>
 												<tr>
-													<th>NOMBRE DEL CASO </th>
-													<th>DESCRIPCION</th>
-													<th>ULTIMA VEZ ACTUALIZADO</th>
-
-													<th>INICIO</th>
-													<th>FINALIZACION</th>
+													<th>NOMBRE SOLICITANTE </th>
+													<th>DESCRIPCION - CASO </th>
+													<th>ULTIMA ACTUALIZACION </th>
 													<th width="15%">ACCIONES</th>
 
 												</tr>
@@ -436,15 +371,11 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2) {
 														<td width="25%">
 															<?php echo $row->descripcion; ?>
 														</td>
-														<td>
-															<?php echo $row->actualizado; ?>
-														</td>
+													
 														<td>
 															<?php echo $row->inicio; ?>
 														</td>
-														<td>
-															<?php echo $row->fin; ?>
-														</td>
+														
 														<td>
 
 															<a class="btn btn-primary" href="proyectos/editar.php?id=<?php echo $row->id; ?>"><i class="fa fa-pencil fa-lg" title="Editar" aria-hidden="true"></i></a>
