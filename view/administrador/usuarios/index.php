@@ -96,7 +96,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 
 						</li>
 
-						<li> <a href="../proyectos/index.php"> <i class="fa fa-tasks"></i>PROYECTOS
+						<li> <a href="../proyectos/index.php"> <i class="fa fa-tasks"></i>SOLICITUDES
 
 								<span class="plus"><i class="fa fa-plus"></i></span></a>
 
@@ -127,7 +127,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 						}
 					</script>
 
-					<a class="btn btn-danger" href="javascript:finestraSecundaria('https://sistema.serempresarialgyp.com/view/chat/')">
+					<a class="btn" href="javascript:finestraSecundaria('https://sistema.serempresarialgyp.com/view/chat/')">
 
 						<img src="../../../img/icono_mens.png" width="55" />
 
@@ -148,7 +148,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 				<!--\\\\\\\ contentpanel start\\\\\\-->
 				<div class="pull-left breadcrumb_admin clear_both">
 					<div class="pull-left page_title theme_color">
-						<h1>USUARIOS
+						<h1 style="color: #182d4c;">USUARIOS
 							</a></h1>
 					</div>
 				</div>
@@ -387,4 +387,5 @@ location = location;
 	<script src="../../componentes/js/jPushMenu.js"></script>
 	<script src="../../componentes/js/side-chats.js"></script>
 </body>
+
 </html>

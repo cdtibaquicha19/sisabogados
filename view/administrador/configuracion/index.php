@@ -93,7 +93,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 
             </li>
 
-            <li> <a href="../proyectos/index.php"> <i class="fa fa-tasks"></i>PROYECTOS
+            <li> <a href="../proyectos/index.php"> <i class="fa fa-tasks"></i>SOLICITUDES
 
                 <span class="plus"><i class="fa fa-plus"></i></span></a>
 
@@ -131,7 +131,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 
 
 
-          <a class = "btn btn-danger" href="javascript:finestraSecundaria('https://sistema.bufeteabogadoshs.com/view/chat/')">
+          <a class="btn " href="javascript:finestraSecundaria('https://sistema.bufeteabogadoshs.com/view/chat/')">
 
             <img src="../../../img/icono_mens.png" width="55" />
 
@@ -160,7 +160,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
         <!--\\\\\\\ contentpanel start\\\\\\-->
         <div class="pull-left breadcrumb_admin clear_both">
           <div class="pull-left page_title theme_color">
-            <h1>CONFIGURACION </h1>
+            <h1 style="color: #182d4c;">CONFIGURACION </h1>
 
           </div>
 

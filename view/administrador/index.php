@@ -6,7 +6,6 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
@@ -23,8 +22,6 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
   <link href="../componentes/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet" />
 
 </head>
-
-
 <body class="dark_theme  fixed_header left_nav_fixed">
   <div class="wrapper">
 
@@ -39,9 +36,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
         <!--\\\\\\\ header top bar start \\\\\\-->
         <a href="javascript:void(0);" class="menutoggle"> <i class="fa fa-bars"></i> </a>
         <div class="top_left">
-
         </div>
-
         <div class="top_right_bar">
           <div class="top_right">
             <div class="top_right_menu">
@@ -68,16 +63,8 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
                     } else {
                       echo '<li><a href="#">Sin notificaciones  </a></li>';
                     }
-
                     ?>
-
-
-
                   </ul>
-
-
-
-
                 </li>
               </ul>
             </div>
@@ -92,13 +79,9 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
                   <li> <a href="../../controller/cerrarSesion.php"><i class="fa fa-power-off"></i> Cerrar sesion</a> </li>
                 </ul>
           </div>
-
-
         </div>
       </div>
-
     </div>
-
     <div class="inner">
       <div class="left_nav">
 
@@ -111,7 +94,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 
             </li>
 
-            <li> <a href="proyectos/index.php"> <i class="fa fa-tasks"></i>PROYECTOS
+            <li> <a href="proyectos/index.php"> <i class="fa fa-tasks"></i>SOLICITUDES
 
                 <span class="plus"><i class="fa fa-plus"></i></span></a>
 
@@ -128,50 +111,30 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
                 </span> <span class="plus"><i class="fa fa-plus"></i></span></a>
 
             </li>
-
-
             <li> <a href="configuracion/index.php"> <i class="fa fa-gear"></i>
                 CONFIGURACION
                 </span> <span class="plus"><i class="fa fa-plus"></i></span>
               </a>
-
-
             </li>
 
           </ul>
           <script language=javascript>
             function finestraSecundaria(url) {
-              window.open(url, "CHAT SISTEMA DPOFUNDATION", "width=900, height=600")
+              window.open(url, "CHAT SISTEMA ", "width=900, height=600")
             }
           </script>
-
-
-
-          <a class="btn btn-danger" href="javascript:finestraSecundaria('https://sistema.serempresarialgyp.com/view/chat/')">
+          <a class="btn" href="javascript:finestraSecundaria('https://sistema.https://bufeteabogadoshs.com/view/chat/')">
 
             <img src="../../img/icono_mens.png" width="55" />
 
             Iniciar chat </a>
-
           <span class="badge badge color_2">
             <?php
-
-
-
             $datos2 = mysqli_query($con, "SELECT * from chat where reciever_userid ='" . $_SESSION['idusuario'] . "' and status = '1'");
-
-
             $numero = mysqli_num_rows($datos2);
-
             echo $numero;
-
             ?>
           </span>
-
-
-
-
-
         </div>
       </div>
       <!--\\\\\\\left_nav end \\\\\\-->
@@ -179,13 +142,10 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
         <!--\\\\\\\ contentpanel start\\\\\\-->
         <div class="pull-left breadcrumb_admin clear_both">
           <div class="pull-left page_title theme_color">
-            <h1>CALENDARIO DE ASIGNACIONES
-
+            <h1>CALENDARIO
               </a>
             </h1>
-
           </div>
-
         </div>
         <div class="container clear_both padding_fix">
           <!--\\\\\\\ container  start \\\\\\-->
@@ -193,15 +153,9 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
           <div class="row">
             <div class="col-md-9">
               <div class="block-web">
-
                 <div class="porlets-content">
-
                   <iframe src="../calendario/index.php" width="95%" scrolling="no" frameborder="0" height="1200px;"></iframe>
-
-
                 </div>
-
-
               </div>
             </div>
             <div class="col-md-3">
@@ -210,9 +164,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
                 <div class="panel-heading">Notificaciones
                   <span class="badge badge color_2">
                     <?php
-
                     $datos = mysqli_query($con, "SELECT * from votaciones");
-
                     $numero = mysqli_num_rows($datos);
                     $datos2 = mysqli_query($con, "SELECT * from asignaciones where id_empleado 
 like '%" . $_SESSION['correo'] . "%'");
@@ -220,15 +172,10 @@ like '%" . $_SESSION['correo'] . "%'");
                     $numero2 = mysqli_num_rows($datos2);
 
                     echo $numero + $numero2;
-
-
-
                     ?>
                   </span>
                 </div>
                 <div class="panel-body">
-
-
                   <?php
                   if ($numero > 0) {
                     while ($row = mysqli_fetch_object($datos)) {
@@ -237,7 +184,6 @@ like '%" . $_SESSION['correo'] . "%'");
                     }
                   } else {
                   }
-
                   if ($numero2 > 0) {
                     while ($row = mysqli_fetch_object($datos2)) {
 
@@ -246,43 +192,13 @@ like '%" . $_SESSION['correo'] . "%'");
                   } else {
                     echo '<li><a href="#">Sin notificaciones  </a></li>';
                   }
-
-
-
-
                   ?>
-
-
-
-
                   </ul>
-
-
-
-
                   </li>
                   </ul>
-
-
-
-
-
-
-
                 </div>
               </div>
-
-
-
-
-
-
-
             </div>
-
-
-
-
           </div>
         </div>
       </div>
