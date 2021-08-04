@@ -5,7 +5,7 @@ include("../../../model/function.php");
 $id = $_GET['id'];
 
 
-delete('proyectos','id',$id);
+delete('casos','idcaso',$id);
 
 
 echo "<script> 

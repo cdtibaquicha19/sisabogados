@@ -12,7 +12,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CLIENTES </title>
+  <title>ABOGADOS </title>
   <meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
   <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
   <link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -136,15 +136,14 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
 
 
 
-          <a class"btn btn-danger" href="javascript:finestraSecundaria('https://sistema.multiaccess.co/view/chat/')">
+          <a class = " btn " href="javascript:finestraSecundaria('https://sistema.bufetedeabogadoshs/view/chat/')">
 
-            <img src="../../../img/icono_mens.png" width="55" />
+            <img src="../../img/icono_mens.png" width="55" />
 
             Iniciar chat </a>
 
           <span class="badge badge color_2">
             <?php
-
 
 
             $datos2 = mysqli_query($con, "SELECT * from chat where reciever_userid ='" . $_SESSION['idusuario'] . "' and status = '1'");

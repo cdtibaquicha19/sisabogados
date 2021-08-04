@@ -213,16 +213,16 @@ swal("Actualizado correctamente","","success")
 			<h6>Actual : <strong><?php if($row->tipo==1){
 					echo "Administrador";
 }elseif($row->tipo==2){
-	echo "Grupo de trabajo";
-}elseif($row->tipo==3){
 	echo "Cliente";
+}elseif($row->tipo==3){
+	echo "Abogado";
 }
 			?></strong>  </h6>
 <select name="tipo" class="form-control">
 							  	<option value="<?php echo $row->tipo;?>">Seleccione</option>
 								<option value="1">Administrador</option>
-								<option value="2">Grupo de trabajo</option>
-							  	<option value="3">Cliente</option>
+								<option value="2">Cliente</option>
+							  	<option value="3">Abogado</option>
 
 							</select>
 		</div>

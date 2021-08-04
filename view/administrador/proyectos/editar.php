@@ -135,7 +135,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									<h4 class="modal-title" id="myModalLabel">Cargar documentos a <?php echo $row->title; ?></h4>
+									<h4 class="modal-title" id="myModalLabel">Cargar documentos a Solicitud :  <?php echo $row->idcaso; ?></h4>
 								</div>
 								<div class="modal-body">
 
@@ -157,7 +157,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 												$description  = $_POST["description"];
 
 												$query = "INSERT INTO archivos (idproyecto,idempleado,ruta,tipo,size) 
-    VALUES ('$nombre','" . $_SESSION['usuario'] . $fecha . "','" . $nombrefinal . "','" . $_FILES['fichero']['type'] . "','" . $_FILES['fichero']['size'] . "')";
+    VALUES ('$id','" . $_SESSION['usuario'] . $fecha . "','" . $nombrefinal . "','" . $_FILES['fichero']['type'] . "','" . $_FILES['fichero']['size'] . "')";
 
 												db_query($query);
 											}
@@ -179,7 +179,7 @@ location = location;
 
 										<input class="form-control" name="fichero" type="file" size="150" maxlength="150">
 										<input type="hidden" class="form-control" name="nombre" value="<?php echo $row->id; ?>" size="70" maxlength="70">
-										<input type="hidden" class="form-control" value="<?php echo $row->title; ?> " name="description" size="100" maxlength="250">
+										<input type="hidden" class="form-control" value="<?php echo $row->idcaso; ?> " name="description" size="100" maxlength="250">
 										<br><br>
 								</div>
 								<div class="modal-footer">
