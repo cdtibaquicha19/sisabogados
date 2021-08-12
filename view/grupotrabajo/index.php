@@ -31,7 +31,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2) {
 
 			<div class="brand">
 
-				<div class="logo" style="display:block"><span class="theme_color">DASHBOARD 2 </span> </div>
+				<div class="logo" style="display:block"><span class="theme_color">DASHBOARD </span> </div>
 			</div>
 			<!--\\\\\\\ brand end \\\\\\-->
 			<div class="header_top_bar">
@@ -313,7 +313,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2) {
 											<tbody>
 												<?php
 
-												$sql = "select * from casos ";
+												$sql = "select * from casos where correo ='".$_SESSION['correo']."' ORDER BY `casos`.`idcaso` DESC ";
 												$result = db_query($sql);
 												while ($row = mysqli_fetch_object($result)) {
 												?>

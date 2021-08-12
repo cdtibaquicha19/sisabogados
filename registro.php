@@ -63,9 +63,6 @@ if (isset($_SESSION['id'])) {
         <form id="formulario_registro">
           <!-- Estructura del formulario -->
           <fieldset>
-
-
-
             <!-- Caja de texto para usuario -->
             <label class="sr-only" for="user">Ingresa Nombre completo </label>
             <div class="input-group">
@@ -129,9 +126,7 @@ if (isset($_SESSION['id'])) {
       </div>
     </div>
   </div>
-
   <!-- / Final Formulario login -->
-
   <!-- Jquery -->
   <script src="js/jquery.js"></script>
   <!-- Bootstrap js -->

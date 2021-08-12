@@ -292,12 +292,13 @@ location = location;
 						<br />
 						<br />
 						<div class="header">
-							<!-- Button trigger modal -->
+							<!-- Button trigger modal 
+							
 							<button style="float: right" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal5">
 								Crear asignacion a Grupo de trabajo
 							</button>
 
-							<!-- Modal -->
+							 -->
 							<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">

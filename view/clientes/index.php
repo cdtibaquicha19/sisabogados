@@ -24,15 +24,10 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
   <link href="../componentes/plugins/advanced-datatable/css/demo_page.css" rel="stylesheet" />
 
 </head>
-
-
 <body class="dark_theme  fixed_header left_nav_fixed">
   <div class="wrapper">
-
     <div class="header_bar">
-
       <div class="brand">
-
         <div class="logo" style="display:block"><span class="theme_color">DASHBOARD </span> </div>
       </div>
       <!--\\\\\\\ brand end \\\\\\-->
@@ -40,9 +35,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
         <!--\\\\\\\ header top bar start \\\\\\-->
         <a href="javascript:void(0);" class="menutoggle"> <i class="fa fa-bars"></i> </a>
         <div class="top_left">
-
         </div>
-
         <div class="top_right_bar">
           <div class="top_right">
             <div class="top_right_menu">
@@ -53,9 +46,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
                       $datos = mysqli_query($con, "SELECT * from votaciones ");
                       $numero = mysqli_num_rows($datos);
                       $datos2 = mysqli_query($con, "SELECT * from asignaciones where id_empleado ='" . $_SESSION['correo'] . "'");
-
                       $numero2 = mysqli_num_rows($datos2);
-
                       echo $numero + $numero2;
                       ?>
                     </span> </a>
@@ -69,16 +60,8 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
                     } else {
                       echo '<li><a href="#">Sin notificaciones  </a></li>';
                     }
-
                     ?>
-
-
-
                   </ul>
-
-
-
-
                 </li>
               </ul>
             </div>
@@ -93,13 +76,9 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
                   <li> <a href="../../controller/cerrarSesion.php"><i class="fa fa-power-off"></i> Cerrar sesion</a> </li>
                 </ul>
           </div>
-
-
         </div>
       </div>
-
     </div>
-
     <div class="inner">
       <div class="left_nav">
 
@@ -111,32 +90,19 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
             <li class="left_nav_active theme_border"><a href="javascript:void(0);"><i class="fa fa-home"></i> INICIO <span class="left_nav_pointer"></span> <span class="plus"><i class="fa fa-plus"></i></span> </a>
 
             </li>
-
-            <li> <a href="proyectos/index.php"> <i class="fa fa-tasks"></i>SOLICITUDES
-                <span class="badge badge color_2" style="float: right">
-
-                  <?php
-                  $datos = mysqli_query($con, "SELECT * from proyectos ");
-                  $numero = mysqli_num_rows($datos);
-                  echo $numero;
-                  ?>
-                </span>
-                <span class="plus"><i class="fa fa-plus"></i></span></a>
-
+            <li> 
+              <a href="proyectos/index.php"> <i class="fa fa-tasks"></i>SOLICITUDES
+                
+                <span class="plus"><i class="fa fa-plus"></i></span>
+              </a>
             </li>
-
-
-
           </ul>
           <script language=javascript>
             function finestraSecundaria(url) {
               window.open(url, "CHAT SISTEMA multiaccess", "width=900, height=600")
             }
           </script>
-
-
-
-          <a class = " btn " href="javascript:finestraSecundaria('https://sistema.bufetedeabogadoshs/view/chat/')">
+          <a class=" btn " href="javascript:finestraSecundaria('https://sistema.bufetedeabogadoshs/view/chat/')">
 
             <img src="../../img/icono_mens.png" width="55" />
 
@@ -144,22 +110,12 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
 
           <span class="badge badge color_2">
             <?php
-
-
             $datos2 = mysqli_query($con, "SELECT * from chat where reciever_userid ='" . $_SESSION['idusuario'] . "' and status = '1'");
-
-
             $numero = mysqli_num_rows($datos2);
-
             echo $numero;
 
             ?>
           </span>
-
-
-
-
-
         </div>
       </div>
       <!--\\\\\\\left_nav end \\\\\\-->
@@ -183,14 +139,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
               <div class="block-web">
 
                 <div class="porlets-content">
-
-
-
-
-
                   <!-- Nav tabs -->
-
-
                   <?php
                   include("../../model/function.php");
 
@@ -217,10 +166,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
     <div id="' . $row2->nombre_depa . '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
        
-	    <iframe  src="../biblioteca/' . $row2->nombre_depa . '/index.html" width="95%" scrolling="no" frameborder="0" height="1200px;"></iframe>
-	   
-	   
-	   
+	    <iframe  src="../biblioteca/' . $row2->nombre_depa . '/index.html" width="95%" scrolling="no" frameborder="0" height="600px;"></iframe>
       </div>
     </div>
   </div>
@@ -231,44 +177,16 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
                     }
 
                     ?>
-
-
                     </tr>
                   <?php
-
                   }
-
                   ?>
-
                   </ul>
 
                   <!-- Tab panes -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
               </div>
-
-
-
-
             </div>
           </div>
           <div class="col-md-3">
@@ -277,25 +195,16 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
               <div class="panel-heading">Notificaciones
                 <span class="badge badge color_2">
                   <?php
-
                   $datos = mysqli_query($con, "SELECT * from votaciones");
-
                   $numero = mysqli_num_rows($datos);
-
                   $datos2 = mysqli_query($con, "SELECT * from asignaciones where id_empleado ='" . $_SESSION['correo'] . "'");
-
                   $numero2 = mysqli_num_rows($datos2);
-
                   echo $numero + $numero2;
-
-
 
                   ?>
                 </span>
               </div>
               <div class="panel-body">
-
-
                 <?php
                 if ($numero > 0) {
                   while ($row = mysqli_fetch_object($datos)) {
@@ -313,43 +222,13 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
                 } else {
                   echo '<li><a href="#">Sin notificaciones  </a></li>';
                 }
-
-
-
-
                 ?>
-
-
-
-
                 </ul>
-
-
-
-
                 </li>
                 </ul>
-
-
-
-
-
-
-
               </div>
             </div>
-
-
-
-
-
-
-
           </div>
-
-
-
-
         </div>
       </div>
     </div>

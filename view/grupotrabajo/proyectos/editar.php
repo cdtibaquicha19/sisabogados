@@ -1,14 +1,9 @@
 <?php
 session_start();
-if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
+if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2) {
 	header('location: ../../../index.php');
 }
 ?>
-
-
-
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 
@@ -16,7 +11,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ADMINISTRADOR</title>
+	<title>ABOGADOS</title>
 	<meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
 	<link href="../../../css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<link href="../../componentes/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -35,7 +30,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 
 			<div class="brand">
 
-				<div class="logo" style="display:block"><span class="theme_color">DASHBOARD </span> </div>
+				<div class="logo" style="display:block"><span class="theme_color">DASHBOARD</span> </div>
 			</div>
 			<!--\\\\\\\ brand end \\\\\\-->
 			<div class="header_top_bar">
@@ -69,7 +64,6 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 					</div>
 				</div>
 			</div>
-
 		</div>
 		<?php
 		include("../../../model/function.php");
@@ -83,18 +77,13 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 				<img src="../../../img/logo joaking curvasblanco.png" width="90%" alt="" />
 				<div class="left_nav_slidebar">
 					<ul>
-						<li><a href="../index.php"><i class="fa fa-home"></i>CALENDARIO
+						<li><a href="../index.php"><i class="fa fa-home"></i>INICIO
 								<span class="plus"><i class="fa fa-plus"></i></span> </a>
 						</li>
 
-						<li class="left_nav_active theme_border"> <a href="index.php"> <i class="fa fa-tasks"></i>PROYECTOS
+						<li class="left_nav_active theme_border"> <a href="index.php"> <i class="fa fa-tasks"></i>SOLICITUDES
 								<span class="left_nav_pointer"></span>
 								<span class="plus"><i class="fa fa-plus"></i></span></a>
-
-						</li>
-						<li> <a href="../usuarios/index.php"> <i class="fa fa-tasks"></i>
-								USUARIOS
-								</span></span><span class="plus"><i class="fa fa-plus"></i></span></a>
 
 						</li>
 						<li>
@@ -112,8 +101,8 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 				<!--\\\\\\\ contentpanel start\\\\\\-->
 				<div class="pull-left breadcrumb_admin clear_both">
 					<div class="pull-left page_title theme_color">
-						<h1><a href="index.php">PROYECTOS</a>
-						</h1> Editar
+						<h1><a href="index.php">ASIGNACIONES</a>
+						</h1> <span style="color:blue"> ver</span>
 					</div>
 				</div>
 				<div class="container clear_both padding_fix">
@@ -180,22 +169,13 @@ location = location;
 										}
 									}
 									?>
-
 									<form action=" " method="post" enctype="multipart/form-data">
 										Seleccione archivo:
 
 										<input class="form-control" name="fichero" type="file" size="150" maxlength="150">
 										<input type="hidden" class="form-control" name="nombre" value="<?php echo $row->id; ?>" size="70" maxlength="70">
 										<input type="hidden" class="form-control" value="<?php echo $row->nombre; ?> " name="description" size="100" maxlength="250">
-
-
-
-
 										<br><br>
-
-
-
-
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -205,28 +185,12 @@ location = location;
 							</div>
 						</div>
 					</div>
-
-
-
-
-
-
 					<br>
 					<br>
-
-
-
-
-
-
-
 
 					<div class="header">
 
 						<h3 class="content-header">Editar - <?php
-
-
-
 															echo $row->nombre; ?></h3>
 
 					</div>
@@ -258,8 +222,6 @@ location.href=" ";
 						}
 						if (isset($_POST['submit4'])) {
 
-
-
 							$actividad = $_POST['actividad'];
 							$idempleado = $_POST['id_empleado'];
 							$fechaini = $_POST['fecha'];
@@ -267,9 +229,7 @@ location.href=" ";
 							$observaciones = $_POST['observaciones'];
 							$proyecto = $row->nombre;
 
-
 							$query =  "INSERT INTO asignaciones (id , asignacion , id_proyecto ,nombre_proyecto, id_empleado, fecha, feha_fin, observaciones, estado) VALUES (NULL, '$actividad','$id','$proyecto','$idempleado','$fechaini', '$fechafin', '$observaciones', 'asignado');";
-
 
 							if (db_query($query)) {
 
@@ -328,20 +288,17 @@ location = location;
 								<h3><?php echo $row->fin; ?></h3>
 
 							</div>
-
 						</div>
 						<br />
 						<br />
 						<div class="header">
-
-
-
-							<!-- Button trigger modal -->
+							<!-- Button trigger modal 
+							
 							<button style="float: right" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal5">
 								Crear asignacion a Grupo de trabajo
 							</button>
 
-							<!-- Modal -->
+							 -->
 							<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
@@ -350,37 +307,7 @@ location = location;
 											<h4 class="modal-title" id="myModalLabel">Creador de asignaciones </h4>
 										</div>
 										<div class="modal-body">
-
-
-
-
 											<form action=" " method="post">
-												<!--/
-			   <p>Seleccione actividad</p>
-			   <select  name="actividad" class="form-control">
-			   <option  >Seleccione</option>
-				<option disabled>-------------- FASE 1 (Planeacion )-------------</option>
-				<option  class="" value="titulo" >Titulo</option>
-				<option  class="" value="antecedentes" >Antecedentes</option>
-				<option  class="" value="justificacion" >Justificacion</option>
-				<option  class="" value="componentes" >Componentes</option>
-				<option disabled>-------------- FASE 2 (Actividades )-------------</option>
-				<option  class="" value="actividades" >Actividades</option>
-				<option  class="" value="indicadores" >Indicadores y medios de verificacion</option>
-				<option  class="" value="factores" >Factores externos</option>
-				<option disabled>-------------- FASE 3 (Presupuesto )-------------</option>
-				<option  class="" value="insumos" >Insumos</option>
-				<option  class="" value="viabilidad" >Viabilidad</option>
-				<option  class="" value="metodologia" >Metodologia</option>   
-				<option disabled>-------------- FASE 4 (Ejecucion )-------------</option>
-				<option  class="" value="calendarios" >Calendarios ejecucion de actividades </option>
-				<option  class="" value="monitoreo" >Monitoreo y evaluacion </option>
-				<option  class="" value="anexos" >Anexos</option>      
-				   
-				   
-				   
-			   </select>
-			   -->
 
 												<br>
 												<p>Seleccione usuario</p>
@@ -399,8 +326,6 @@ location = location;
 												<div class="col-md-6">
 													<p>Fecha inicio </p>
 													<input class="form-control" type="date" name="fecha" />
-
-
 												</div>
 												<div class="col-md-6">
 
@@ -408,25 +333,10 @@ location = location;
 													<input class="form-control" type="date" name="fecha_fin" />
 
 												</div>
-
-
 												<p>Observaciones </p>
 												<input class="form-control" type="text" name="observaciones" />
 												<br>
 												<br>
-
-
-
-
-
-
-
-
-
-
-
-
-
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -437,355 +347,8 @@ location = location;
 									</div>
 								</div>
 							</div>
-
-							<!--/	
-    <h3 class="content-header">Asignaciones</h3>
-    </div>
-	<div class="row">
-	
-		<div class="col-md-3">
-		<h5><strong>FASE 1 (Planeacion)</strong></h5> 
-		
-		</div>
-	
-		<div class="col-md-3">
-		<h5><strong>FASE 2 (Actividades)</strong></h5>
-		
-		</div>
-		<div class="col-md-3">
-			
-		<h5><strong>FASE 3 (Presupuesto)</strong></h5>
-
-		
-		</div>
-		<div class="col-md-3">
-			
-		<h5><strong>FASE 4 (Ejecucion)</strong></h5>
-		
-		</div>
-	
-	</div>
-	<div class="row">
-		
-	
-		<div class="col-md-3">
-		<?php
-		$sql = "select * from asignaciones where id_proyecto = '$id' and asignacion ='titulo' ";
-		$result = db_query($sql);
-		?>
-      <h4 class="panel-title">
-        <a class="list-group-item" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
-         Titulo  
-	<?php while ($row = mysqli_fetch_object($result)) {
-
-
-		if ($row->estado = "asignado") {
-
-			echo '<div class="alert alert-warning" role="alert">Asignado a ' . $row->id_empleado . '</div>';
-		} else {
-			echo " normal";
-		}
-	}
-	?> 
-        </a>
-      </h4>
-			
-			
-			
-			
-			<?php
-			$sql = "select * from asignaciones where id_proyecto = '$id' and asignacion ='antecedentes' ";
-			$result = db_query($sql);
-			?>
-      <h4 class="panel-title">
-        <a class="list-group-item" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
-         Antecedentes  
-	<?php while ($row = mysqli_fetch_object($result)) {
-
-
-		if ($row->estado = "asignado") {
-
-			echo '<div class="alert alert-warning" role="alert">Asignado a ' . $row->id_empleado . '</div>';
-		} else {
-			echo " normal";
-		}
-	}
-	?> 
-        </a>
-      </h4>
-			<?php
-			$sql = "select * from asignaciones where id_proyecto = '$id' and asignacion ='justificacion' ";
-			$result = db_query($sql);
-			?>
-      <h4 class="panel-title">
-        <a class="list-group-item" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
-        Justificacion  
-	<?php while ($row = mysqli_fetch_object($result)) {
-
-
-		if ($row->estado = "asignado") {
-
-			echo '<div class="alert alert-warning" role="alert">Asignado a ' . $row->id_empleado . '</div>';
-		} else {
-			echo " normal";
-		}
-	}
-	?> 
-        </a>
-      </h4>
-			
-			<?php
-			$sql = "select * from asignaciones where id_proyecto = '$id' and asignacion ='componentes' ";
-			$result = db_query($sql);
-			?>
-      <h4 class="panel-title">
-        <a class="list-group-item" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
-        Componentes
-	<?php while ($row = mysqli_fetch_object($result)) {
-
-
-		if ($row->estado = "asignado") {
-
-			echo '<div class="alert alert-warning" role="alert">Asignado a ' . $row->id_empleado . '</div>';
-		} else {
-			echo " normal";
-		}
-	}
-	?> 
-        </a>
-      </h4>
-			
-			
-			
-   
-    </div>
-		
-		
-  
-	
-		
-		<div class="col-md-3">
-			
-			<?php
-			$sql = "select * from asignaciones where id_proyecto = '$id' and asignacion ='actividades' ";
-			$result = db_query($sql);
-			?>
-      <h4 class="panel-title">
-        <a class="list-group-item" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
-        Actividades
-	<?php while ($row = mysqli_fetch_object($result)) {
-
-
-		if ($row->estado = "asignado") {
-
-			echo '<div class="alert alert-warning" role="alert">Asignado a ' . $row->id_empleado . '</div>';
-		} else {
-			echo " normal";
-		}
-	}
-	?> 
-        </a>
-      </h4>
-			
-			<?php
-			$sql = "select * from asignaciones where id_proyecto = '$id' and asignacion ='indicadores' ";
-			$result = db_query($sql);
-			?>
-      <h4 class="panel-title">
-        <a class="list-group-item" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
-        Indicadores y medios de verificacion
-	<?php while ($row = mysqli_fetch_object($result)) {
-
-
-		if ($row->estado = "asignado") {
-
-			echo '<div class="alert alert-warning" role="alert">Asignado a ' . $row->id_empleado . '</div>';
-		} else {
-			echo " normal";
-		}
-	}
-	?> 
-        </a>
-      </h4>
-			<?php
-			$sql = "select * from asignaciones where id_proyecto = '$id' and asignacion ='factores' ";
-			$result = db_query($sql);
-			?>
-      <h4 class="panel-title">
-        <a class="list-group-item" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
-       Factores externos
-	<?php while ($row = mysqli_fetch_object($result)) {
-
-
-		if ($row->estado = "asignado") {
-
-			echo '<div class="alert alert-warning" role="alert">Asignado a ' . $row->id_empleado . '</div>';
-		} else {
-			echo " normal";
-		}
-	}
-	?> 
-        </a>
-      </h4>
-			
-		
-		
-		
-		
-		</div>
-		<div class="col-md-3">
-			
-			<?php
-			$sql = "select * from asignaciones where id_proyecto = '$id' and asignacion ='insumos' ";
-			$result = db_query($sql);
-			?>
-      <h4 class="panel-title">
-        <a class="list-group-item" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
-       Insumos
-	<?php while ($row = mysqli_fetch_object($result)) {
-
-
-		if ($row->estado = "asignado") {
-
-			echo '<div class="alert alert-warning" role="alert">Asignado a ' . $row->id_empleado . '</div>';
-		} else {
-			echo " normal";
-		}
-	}
-	?> 
-        </a>
-      </h4>
-			<?php
-			$sql = "select * from asignaciones where id_proyecto = '$id' and asignacion ='viabilidad' ";
-			$result = db_query($sql);
-			?>
-      <h4 class="panel-title">
-        <a class="list-group-item" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
-	Viabilidad
-	<?php while ($row = mysqli_fetch_object($result)) {
-
-
-		if ($row->estado = "asignado") {
-
-			echo '<div class="alert alert-warning" role="alert">Asignado a ' . $row->id_empleado . '</div>';
-		} else {
-			echo " normal";
-		}
-	}
-	?> 
-        </a>
-      </h4>
-			<?php
-			$sql = "select * from asignaciones where id_proyecto = '$id' and asignacion ='metodologia' ";
-			$result = db_query($sql);
-			?>
-      <h4 class="panel-title">
-        <a class="list-group-item" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
-       Metodologia<br>
-			<li>Presupuesto</li>
-			<li>Calendario Desenboldo</li>
-			
-	<?php while ($row = mysqli_fetch_object($result)) {
-
-
-		if ($row->estado = "asignado") {
-
-			echo '<div class="alert alert-warning" role="alert">Asignado a ' . $row->id_empleado . '</div>';
-		} else {
-			echo " normal";
-		}
-	}
-	?> 
-        </a>
-      </h4>
-			
-			
-		
-		
-		
-		
-		</div>
-		<div class="col-md-3">
-			
-			
-			<?php
-			$sql = "select * from asignaciones where id_proyecto = '$id' and asignacion ='calendarios' ";
-			$result = db_query($sql);
-			?>
-      <h4 class="panel-title">
-        <a class="list-group-item" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
-	Calendario ejecucion de actividades 
-	<?php while ($row = mysqli_fetch_object($result)) {
-
-
-		if ($row->estado = "asignado") {
-
-			echo '<div class="alert alert-warning" role="alert">Asignado a ' . $row->id_empleado . '</div>';
-		} else {
-			echo " normal";
-		}
-	}
-	?> 
-        </a>
-      </h4>
-	<?php
-	$sql = "select * from asignaciones where id_proyecto = '$id' and asignacion ='monitoreo' ";
-	$result = db_query($sql);
-	?>
-      <h4 class="panel-title">
-        <a class="list-group-item" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
-	Monitoreo y evaluacion 
-	<?php while ($row = mysqli_fetch_object($result)) {
-
-
-		if ($row->estado = "asignado") {
-
-			echo '<div class="alert alert-warning" role="alert">Asignado a ' . $row->id_empleado . '</div>';
-		} else {
-			echo " normal";
-		}
-	}
-	?> 
-        </a>
-      </h4>
-			
-	<?php
-	$sql = "select * from asignaciones where id_proyecto = '$id' and asignacion ='anexos' ";
-	$result = db_query($sql);
-	?>
-      <h4 class="panel-title">
-        <a class="list-group-item" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
-	Anexos
-	<?php while ($row = mysqli_fetch_object($result)) {
-
-
-		if ($row->estado = "asignado") {
-
-			echo '<div class="alert alert-warning" role="alert">Asignado a ' . $row->id_empleado . '</div>';
-		} else {
-			echo " normal";
-		}
-	}
-	?> 
-        </a>
-      </h4>		
-		
-		
-		
-		
-		
-		</div>
-	</div>	
-			</div>
-			
-			
-			-->
 							<br />
-
-							<br />
-
 							<div class="header">
-
 								<h3 class="content-header">Asignaciones </h3>
 							</div>
 
@@ -799,7 +362,6 @@ location = location;
 											<th>ENCARGADO</th>
 											<th>INICIO</th>
 											<th>FIN</th>
-											<th>OPCIONES</th>
 
 										</tr>
 									</thead>
@@ -814,27 +376,14 @@ location = location;
 												<td width="25%"><?php echo $row->id_empleado; ?></td>
 												<td><?php echo $row->fecha; ?></td>
 												<td><?php echo $row->feha_fin; ?></td>
-												<td>
-
-													<a title="Eliminar documento " class="btn btn-danger" target="_blank" href="borrar_doc.php?id=<?php echo $row->id; ?>"> X </a>
-
-
-
-												</td>
-
 											</tr>
 										<?php } ?>
 									</tbody>
 
 								</table>
 							</div>
-
-
 							<br>
 							<br>
-
-
-
 
 							<div class="header">
 
@@ -862,9 +411,6 @@ location = location;
 												<td>
 													<a class="btn btn-default" target="_blank" href="../../carga/upload/<?php echo $row->ruta; ?>"> Ver documento </a>
 													<a title="Eliminar documento " class="btn btn-danger" target="_blank" href="borrar_doc.php?id=<?php echo $row->id; ?>"> X </a>
-
-
-
 												</td>
 
 											</tr>

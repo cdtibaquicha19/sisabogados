@@ -1,15 +1,7 @@
 <?php
-  // Se prendio esta mrd :v
   session_start();
-
-  // Validamos que exista una session y ademas que el cargo que exista sea igual a 1 (Administrador)
   if(!isset($_SESSION['cargo']) || $_SESSION['cargo'] != 1){
-    /*
-      Para redireccionar en php se utiliza header,
-      pero al ser datos enviados por cabereza debe ejecutarse
-      antes de mostrar cualquier informacion en el DOM es por eso que inserto este
-      codigo antes de la estructura del html, espero haber sido claro
-    */
+  
     header('location: ../../index.php');
   }
 
@@ -44,9 +36,7 @@
       <!--\\\\\\\ header top bar start \\\\\\-->
       <a href="javascript:void(0);" class="menutoggle"> <i class="fa fa-bars"></i> </a>
       <div class="top_left">
-        
       </div>
-      
       <div class="top_right_bar">
         <div class="top_right">
           <div class="top_right_menu">
@@ -62,8 +52,6 @@
 				  $numero = mysqli_num_rows($datos);
 				  echo $numero ; 
 ?>
-				  
-				  
 				  </span> </a>
                 
               </li>

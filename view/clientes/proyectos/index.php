@@ -188,7 +188,6 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
 												<?php
 												$valor = "'".$_SESSION['correo']."'"; 
 												$sql = "select * from asignaciones where id_empleado =".$valor."";
-												echo $sql ; 
 												$result = db_query($sql);
 												while ($row = mysqli_fetch_object($result)) {
 												?>
