@@ -1,7 +1,7 @@
 <?php 
 include("../../model/function.php");
 $id = $_GET['id'];
-delete('solicitudcertificacion','idsolicitud',$id);
+delete('casos','idcaso',$id);
 header("location:index.php");
 
 function write_log($cadena,$tipo)
