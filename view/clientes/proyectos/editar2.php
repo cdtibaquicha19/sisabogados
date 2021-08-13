@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2) {
+if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
 	header('location: ../../../index.php');
 }
 ?>
@@ -11,7 +11,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2) {
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>CLIENTE</title>
+	<title>ABOGADOS</title>
 	<meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
 	<link href="../../../css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<link href="../../componentes/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -45,7 +45,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2) {
 								<li class="dropdown"> <a href="javascript:void(0);" data-toggle="dropdown"> Notificaciones <span class="badge badge color_2">
 											<?php
 											include("../../../model/conexion.php");
-											$datos = mysqli_query($con, "SELECT * from proyectos  ");
+											$datos = mysqli_query($con, "SELECT * from casos  ");
 											$numero = mysqli_num_rows($datos);
 											echo $numero;
 											?>
@@ -69,24 +69,25 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2) {
 		include("../../../model/function.php");
 		$id = $_GET['id'];
 		select_id('casos', 'idcaso', $id);
-		$inicio = $row->fecha;
-		
+		$inicio = $row->fecha_creacion;
 		?>
 		<div class="inner">
 			<div class="left_nav">
 				<img src="../../../img/logo joaking curvasblanco.png" width="90%" alt="" />
 				<div class="left_nav_slidebar">
 					<ul>
-					<li class="left_nav_active theme_border"> <a href="../index.php"> <i class="fa fa-tasks"></i>SOLICITUDES
-								<span class="left_nav_pointer"></span>
+						<li class="left_nav_active theme_border"><a href="../index.php"><i class="fa fa-home"></i>ASIGNACIONES
+						<span class="left_nav_pointer"></span>
+								<span class="plus">
+									<i class="fa fa-plus"></i>
+								</span> </a>
+						</li>
+
+						<li > <a href="index.php"> <i class="fa fa-tasks"></i>BIBLIOTECA
+								
 								<span class="plus"><i class="fa fa-plus"></i></span></a>
 
 						</li>
-						<li><a href="../../biblioteca/index2.php"><i class="fa fa-home"></i>BIBLIOTECA
-								<span class="plus"><i class="fa fa-plus"></i></span> </a>
-						</li>
-
-						
 						<li>
 							<div class="alert alert-warning" role="alert">
 								<strong>Ultima modificacion </strong><br />
@@ -204,12 +205,12 @@ location = location;
 							$field = array(
 								"nombre" => $_POST['nombre'],
 								"descripcion" => $_POST['descripcion'],
-								"actualizacion" => $actualizacion
+								"actualizado" => $actualizacion
 
 							);
 
-							$tbl = "casos";
-							edit($tbl, $field, 'idcaso', $id);
+							$tbl = "proyectos";
+							edit($tbl, $field, 'id', $id);
 							echo '<script type="application/javascript">
 	
 	swal("Actualizado correctamente","","success")
@@ -223,13 +224,14 @@ location.href=" ";
 						}
 						if (isset($_POST['submit4'])) {
 
-							
-							$actualizacion = date("Y-m-d/H:m:s ") . $_SESSION['usuario'];
-							$id_caso = $_POST['id_caso'];
+							$actividad = $_POST['actividad'];
+							$idempleado = $_POST['id_empleado'];
+							$fechaini = $_POST['fecha'];
+							$fechafin = $_POST['fecha_fin'];
 							$observaciones = $_POST['observaciones'];
 							$proyecto = $row->nombre;
 
-							$query =  "INSERT INTO observaciones (id , observacion , id_caso ,creada_por) VALUES (NULL, '$observaciones', '$id_caso','$actualizacion');";
+							$query =  "INSERT INTO asignaciones (id , asignacion , id_proyecto ,nombre_proyecto, id_empleado, fecha, feha_fin, observaciones, estado) VALUES (NULL, '$actividad','$id','$proyecto','$idempleado','$fechaini', '$fechafin', '$observaciones', 'asignado');";
 
 							if (db_query($query)) {
 
@@ -243,7 +245,7 @@ location.href=" ";
 								header('Location: ' . $_SERVER['HTTP_REFERER']);
 								echo '<script type="application/javascript">
 	
-swal("Se ha creado correctamente  : "," ","success")
+swal("Se ha asignado correctamente  : ","se envio correo a ' . $idempleado . '","success")
 .then((value) => {
 location = location;
 });
@@ -253,7 +255,7 @@ location = location;
 							} else {
 								echo '<script type="application/javascript">
 	
-	swal("No fue crear la asignacion  ","'.$query.'","error")
+	swal("No fue crear la asignacion  ","","error")
 .then((value) => {
 location = location;
 });
@@ -283,20 +285,21 @@ location = location;
 								<input class="form-control " type="text" value="<?php echo $row->descripcion; ?>" name="descripcion" />
 								<br />
 								<strong><span>
-							
-
+										<h5>Fecha fin</h5>
+									</span></strong>
+								
 							</div>
 						</div>
 						<br />
 						<br />
 						<div class="header">
-							<!-- Button trigger modal  
+							<!-- Button trigger modal 
 							
 							<button style="float: right" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal5">
-								Crear observaciones
+								Crear asignacion a Grupo de trabajo
 							</button>
-							-->
-							
+
+							 -->
 							<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
@@ -307,14 +310,32 @@ location = location;
 										<div class="modal-body">
 											<form action=" " method="post">
 
-												
-												<div class="col-md-12">
+												<br>
+												<p>Seleccione usuario</p>
+												<select name="id_empleado" class="form-control">
+													<option class="" value="">Seleccione</option>
+													<?php
+													$sql = "select * from usuarios ";
+													$result = db_query($sql);
 
-													<input class="form-control" type="hidden" name="id_caso" value="<?php echo $row->idcaso; ?>" />
+													while ($row = mysqli_fetch_object($result)) {
+													?>
+														<option value="<?php echo $row->correo; ?>"><?php echo $row->nombre; ?></option>
+													<?php } ?>
+												</select>
+
+												<div class="col-md-6">
+													<p>Fecha inicio </p>
+													<input class="form-control" type="date" name="fecha" />
+												</div>
+												<div class="col-md-6">
+
+													<p>Fecha fin </p>
+													<input class="form-control" type="date" name="fecha_fin" />
 
 												</div>
 												<p>Observaciones </p>
-												<textarea rows="10" class="form-control" type="text" name="observaciones" ></textarea>
+												<input class="form-control" type="text" name="observaciones" />
 												<br>
 												<br>
 										</div>
@@ -328,40 +349,8 @@ location = location;
 								</div>
 							</div>
 							<br />
-							<div class="header">
-								<h3 class="content-header">Actualizaciones</h3>
-							</div>
 
-							<BR>
-
-							<div class="table-responsive">
-								<table class="display table table-bordered table-striped" id="dynamic-table2">
-									<thead>
-										<tr>
-										
-											<th>Observacion</th>
-											<th>Creada por </th>
-
-										</tr>
-									</thead>
-									<tbody>
-										<?php
-										$sql = "select * from observaciones where id_caso = '$id' ";
-										$result = db_query($sql);
-										while ($row = mysqli_fetch_object($result)) {
-										?>
-											<tr>
-												
-												<td width="70%"><?php echo $row->observacion; ?></td>
-												<td><?php echo $row->creada_por; ?></td>
-											</tr>
-										<?php } ?>
-									</tbody>
-
-								</table>
-							</div>
-							<br>
-							<br>
+						
 
 							<div class="header">
 

@@ -11,7 +11,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ABOGADOS</title>
+	<title>CLIENTE</title>
 	<meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
 	<link href="../../../css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<link href="../../componentes/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -68,28 +68,29 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
 		<?php
 		include("../../../model/function.php");
 		$id = $_GET['id'];
-		select_id('proyectos', 'id', $id);
-		$inicio = $row->inicio;
-		$fin =  $row->fin;
+		select_id('casos', 'idcaso', $id);
+		$inicio = $row->fecha;
+		
 		?>
 		<div class="inner">
 			<div class="left_nav">
 				<img src="../../../img/logo joaking curvasblanco.png" width="90%" alt="" />
 				<div class="left_nav_slidebar">
 					<ul>
-						<li><a href="../index.php"><i class="fa fa-home"></i>INICIO
-								<span class="plus"><i class="fa fa-plus"></i></span> </a>
-						</li>
-
-						<li class="left_nav_active theme_border"> <a href="index.php"> <i class="fa fa-tasks"></i>SOLICITUDES
+					<li class="left_nav_active theme_border"> <a href="../index.php"> <i class="fa fa-tasks"></i>SOLICITUDES
 								<span class="left_nav_pointer"></span>
 								<span class="plus"><i class="fa fa-plus"></i></span></a>
 
 						</li>
+						<li><a href="../../biblioteca/index2.php"><i class="fa fa-home"></i>BIBLIOTECA
+								<span class="plus"><i class="fa fa-plus"></i></span> </a>
+						</li>
+
+						
 						<li>
 							<div class="alert alert-warning" role="alert">
 								<strong>Ultima modificacion </strong><br />
-								<?php echo $row->actualizado; ?>
+								<?php echo $row->actualizacion; ?>
 							</div>
 						</li>
 					</ul>
@@ -173,7 +174,7 @@ location = location;
 										Seleccione archivo:
 
 										<input class="form-control" name="fichero" type="file" size="150" maxlength="150">
-										<input type="hidden" class="form-control" name="nombre" value="<?php echo $row->id; ?>" size="70" maxlength="70">
+										<input type="hidden" class="form-control" name="nombre" value="<?php echo $row->idcaso; ?>" size="70" maxlength="70">
 										<input type="hidden" class="form-control" value="<?php echo $row->nombre; ?> " name="description" size="100" maxlength="250">
 										<br><br>
 								</div>
@@ -203,12 +204,12 @@ location = location;
 							$field = array(
 								"nombre" => $_POST['nombre'],
 								"descripcion" => $_POST['descripcion'],
-								"actualizado" => $actualizacion
+								"actualizacion" => $actualizacion
 
 							);
 
-							$tbl = "proyectos";
-							edit($tbl, $field, 'id', $id);
+							$tbl = "casos";
+							edit($tbl, $field, 'idcaso', $id);
 							echo '<script type="application/javascript">
 	
 	swal("Actualizado correctamente","","success")
@@ -222,14 +223,13 @@ location.href=" ";
 						}
 						if (isset($_POST['submit4'])) {
 
-							$actividad = $_POST['actividad'];
-							$idempleado = $_POST['id_empleado'];
-							$fechaini = $_POST['fecha'];
-							$fechafin = $_POST['fecha_fin'];
+							
+							$actualizacion = date("Y-m-d/H:m:s ") . $_SESSION['usuario'];
+							$id_caso = $_POST['id_caso'];
 							$observaciones = $_POST['observaciones'];
 							$proyecto = $row->nombre;
 
-							$query =  "INSERT INTO asignaciones (id , asignacion , id_proyecto ,nombre_proyecto, id_empleado, fecha, feha_fin, observaciones, estado) VALUES (NULL, '$actividad','$id','$proyecto','$idempleado','$fechaini', '$fechafin', '$observaciones', 'asignado');";
+							$query =  "INSERT INTO observaciones (id , observacion , id_caso ,creada_por) VALUES (NULL, '$observaciones', '$id_caso','$actualizacion');";
 
 							if (db_query($query)) {
 
@@ -243,7 +243,7 @@ location.href=" ";
 								header('Location: ' . $_SERVER['HTTP_REFERER']);
 								echo '<script type="application/javascript">
 	
-swal("Se ha asignado correctamente  : ","se envio correo a ' . $idempleado . '","success")
+swal("Se ha creado correctamente  : "," ","success")
 .then((value) => {
 location = location;
 });
@@ -253,7 +253,7 @@ location = location;
 							} else {
 								echo '<script type="application/javascript">
 	
-	swal("No fue crear la asignacion  ","","error")
+	swal("No fue crear la asignacion  ","'.$query.'","error")
 .then((value) => {
 location = location;
 });
@@ -274,7 +274,7 @@ location = location;
 								<strong><span>
 										<h5>Fecha inicio</h5>
 									</span></strong>
-								<h3><?php echo $row->inicio; ?></h3>
+								<h3><?php echo $row->fecha_creacion; ?></h3>
 							</div>
 							<div class="col-md-9">
 								<strong><span>
@@ -283,22 +283,20 @@ location = location;
 								<input class="form-control " type="text" value="<?php echo $row->descripcion; ?>" name="descripcion" />
 								<br />
 								<strong><span>
-										<h5>Fecha fin</h5>
-									</span></strong>
-								<h3><?php echo $row->fin; ?></h3>
+							
 
 							</div>
 						</div>
 						<br />
 						<br />
 						<div class="header">
-							<!-- Button trigger modal 
+							<!-- Button trigger modal  -->
 							
 							<button style="float: right" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal5">
-								Crear asignacion a Grupo de trabajo
+								Crear observaciones
 							</button>
 
-							 -->
+							
 							<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
@@ -309,32 +307,14 @@ location = location;
 										<div class="modal-body">
 											<form action=" " method="post">
 
-												<br>
-												<p>Seleccione usuario</p>
-												<select name="id_empleado" class="form-control">
-													<option class="" value="">Seleccione</option>
-													<?php
-													$sql = "select * from usuarios ";
-													$result = db_query($sql);
+												
+												<div class="col-md-12">
 
-													while ($row = mysqli_fetch_object($result)) {
-													?>
-														<option value="<?php echo $row->correo; ?>"><?php echo $row->nombre; ?></option>
-													<?php } ?>
-												</select>
-
-												<div class="col-md-6">
-													<p>Fecha inicio </p>
-													<input class="form-control" type="date" name="fecha" />
-												</div>
-												<div class="col-md-6">
-
-													<p>Fecha fin </p>
-													<input class="form-control" type="date" name="fecha_fin" />
+													<input class="form-control" type="hidden" name="id_caso" value="<?php echo $row->idcaso; ?>" />
 
 												</div>
 												<p>Observaciones </p>
-												<input class="form-control" type="text" name="observaciones" />
+												<textarea rows="10" class="form-control" type="text" name="observaciones" ></textarea>
 												<br>
 												<br>
 										</div>
@@ -349,7 +329,7 @@ location = location;
 							</div>
 							<br />
 							<div class="header">
-								<h3 class="content-header">Asignaciones </h3>
+								<h3 class="content-header">Actualizaciones</h3>
 							</div>
 
 							<BR>
@@ -358,24 +338,22 @@ location = location;
 								<table class="display table table-bordered table-striped" id="dynamic-table2">
 									<thead>
 										<tr>
-											<th>ASIGNACION </th>
-											<th>ENCARGADO</th>
-											<th>INICIO</th>
-											<th>FIN</th>
+										
+											<th>Observacion</th>
+											<th>Creada por </th>
 
 										</tr>
 									</thead>
 									<tbody>
 										<?php
-										$sql = "select * from asignaciones where id_proyecto = '$id' ";
+										$sql = "select * from observaciones where id_caso = '$id' ";
 										$result = db_query($sql);
 										while ($row = mysqli_fetch_object($result)) {
 										?>
 											<tr>
-												<td><?php echo $row->observaciones; ?></td>
-												<td width="25%"><?php echo $row->id_empleado; ?></td>
-												<td><?php echo $row->fecha; ?></td>
-												<td><?php echo $row->feha_fin; ?></td>
+												
+												<td width="70%"><?php echo $row->observacion; ?></td>
+												<td><?php echo $row->creada_por; ?></td>
 											</tr>
 										<?php } ?>
 									</tbody>

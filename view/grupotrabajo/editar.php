@@ -185,8 +185,6 @@ echo '<script type="text/javascript">
 		
 
 
-
-		
 		
 	}
 		if(isset($_POST['submit2'])){
@@ -199,10 +197,6 @@ echo '<script type="text/javascript">
 echo '<script type="text/javascript">
          location.href="index.php";       
 </script>';
-		
-
-
-
 		
 		
 	}
