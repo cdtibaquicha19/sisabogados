@@ -10,7 +10,7 @@ delete('casos','idcaso',$id);
 
 echo "<script> 
 
-window.location.replace('index.php'); 
+window.location.replace('editar.php'); 
 
 </script>" ;
 

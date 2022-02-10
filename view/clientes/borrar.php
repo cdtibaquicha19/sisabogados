@@ -2,7 +2,7 @@
 include("../../model/function.php");
 $id = $_GET['id'];
 delete('casos','idcaso',$id);
-header("location:index.php");
+header("location:editar.php.php");
 ;
 
 function write_log($cadena,$tipo)
