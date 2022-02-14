@@ -50,8 +50,8 @@ if (isset($_SESSION['id'])) {
     <div style="margin-top: 150px;" class="row">
       <div class="col-md-6 ">
 
-        <h1 style="color: #182D4C; font-size: 35px;">Formulario registro</h1>
-        <p style="text-align: justify; padding-right: 15px;">Ingresa a nuestro sistema de gestión de solicitudes para nuestros clientes , en el cual podrás encontrar la mejor gestión de caso de una forma personalizada y directa con nosotros ,para lo cual se deben diligenciar los campos de registro y recibirás un correo con la confirmación de los datos de acceso.</p>
+        <h1 style="color: #182D4C; font-size: 35px;">Formulario de registro</h1>
+        <p style="text-align: justify; padding-right: 15px;">BIENVENIDO</p>
         <a href="index.php" type="button" class="btn btn-default btn-lg" name="button" id="login">Iniciar sesion</a>
         <img width="100%" class="img-responsive" src="img/registro.png">
       </div>
@@ -94,10 +94,10 @@ if (isset($_SESSION['id'])) {
             <div class="spacing-2"></div>
 
             <!-- Caja de texto para la clave-->
-            <label class="sr-only" for="clave">Verificar contraseña</label>
+            <label class="sr-only" for="clave">Verificar tu clave</label>
             <div class="input-group">
               <div class="input-group-addon"><i class="fa fa-lock"></i></div>
-              <input type="password" autocomplete="off" class="form-control" name="clave2" placeholder="Verificar contraseña">
+              <input type="password" autocomplete="off" class="form-control" name="clave2" placeholder="Verifica tu clave">
             </div>
 
             <!-- Animacion de load (solo sera visible cuando el cliente espere una respuesta del servidor )-->
