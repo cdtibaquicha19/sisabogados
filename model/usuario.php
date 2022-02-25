@@ -45,7 +45,7 @@
       */
 
       // traemos el id y el nombre de la tabla usuarios donde el usuario sea igual al usuario ingresado y ademas la clave sea igual a la ingresada para ese usuario.
-      $consulta = 'select idusuario, usuario, tipo , departamento, correo, creado_por from usuarios where usuario="'.$user.'" and clave= "'.base64_encode($clave).'"';
+      $consulta = 'select idusuario, usuario, tipo , departamento, correo, creado_por from usuarios where correo="'.$user.'" and clave= "'.base64_encode($clave).'"';
       
 		
 		/*
@@ -97,7 +97,6 @@
         $_SESSION['idusuario'] = $user['idusuario'];
         $_SESSION['usuario'] = $user['usuario'];
         $_SESSION['tipo']  = $user['tipo'];
-		  
 		    $_SESSION['departamento']  = $user['departamento'];
 		    $_SESSION['correo']  = $user['correo'];
 		    $_SESSION['creado_por']  = $user['creado_por'];
@@ -153,7 +152,7 @@
 
 
       // validar que el correo no exito
-      $verificarCorreo = parent::verificarRegistros('select id from usuarios where email="'.$email.'" ');
+      $verificarCorreo = parent::verificarRegistros('select idusuario from usuarios where correo="'.$email.'" ');
 
 
       if($verificarCorreo > 0){
@@ -162,14 +161,14 @@
 
         $clave2 = base64_encode($clave);
 
-        parent::query('insert into usuarios(nombre,correo,usuario, clave, status, tipo) values("'.$name.'", "'.$email.'","'.$email.'", "'.$clave2.'",1,2)');
+        parent::query('insert into usuarios(nombre,correo,usuario,clave,status,tipo) values("'.$name.'", "'.$email.'","'.$email.'", "'.$clave2.'",1,3)');
 
         session_start();
       
         $_SESSION['correo'] = $email;
-        $_SESSION['tipo']  = 2;
-
-        echo 'view/grupotrabajo/index.php';
+        $_SESSION['tipo']  = 3;
+       
+        echo 'view/clientes/index.php';
         
 
       }

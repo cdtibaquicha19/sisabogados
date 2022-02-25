@@ -90,7 +90,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
 							</ul>
 						</div>
 					</div>
-					<div class="user_admin dropdown"> <a href="javascript:void(0);" data-toggle="dropdown"><img width="35px" src="../componentes/images/user.png" /><span class="user_adminname"><?php echo ucfirst($_SESSION['usuario']); ?>
+					<div class="user_admin dropdown"> <a href="javascript:void(0);" data-toggle="dropdown"><img width="35px" src="../componentes/images/user.png" /><span class="user_adminname"><?php echo ucfirst($_SESSION['correo']); ?>
 
 								<ul class="dropdown-menu">
 									<div class="top_pointer"></div>
