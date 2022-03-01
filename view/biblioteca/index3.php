@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2 ) {
+if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3 ) {
   header('location: ../../index.php');
 }
 
@@ -83,7 +83,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2 ) {
           <ul>
 
 
-            <li> <a href="../grupotrabajo/index.php"> <i class="fa fa-tasks"></i>SOLICITUDES
+            <li> <a href="../clientes/index.php"> <i class="fa fa-tasks"></i>SOLICITUDES
 
                 <span class="plus"><i class="fa fa-plus"></i></span></a>
 

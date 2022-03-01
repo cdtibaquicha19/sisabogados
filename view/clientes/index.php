@@ -118,7 +118,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
 
 						</li>
 						<li>
-							<a href="../biblioteca/index2.php"> <i class="fa fa-bookmark"></i>
+							<a href="../biblioteca/index3.php"> <i class="fa fa-bookmark"></i>
 								BIBLIOTECA
 
 								</span> <span class="plus"><i class="fa fa-plus"></i></span></a>
@@ -306,7 +306,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 3) {
 												<tr>
 													<th>ID</th>
 													<th>NOMBRE SOLICITUD</th>
-													<th>AASIGNACION</th>
+													<th>ASIGNACION</th>
 													<th>FECHA </th>
 													<th width="15%">ACCIONES</th>
 												</tr>

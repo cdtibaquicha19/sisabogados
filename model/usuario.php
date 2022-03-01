@@ -161,14 +161,14 @@
 
         $clave2 = base64_encode($clave);
 
-        parent::query('insert into usuarios(nombre,correo,usuario,clave,status,tipo) values("'.$name.'", "'.$email.'","'.$email.'", "'.$clave2.'",1,3)');
+        parent::query('insert into usuarios(nombre,correo,usuario,clave,status,tipo) values("'.$name.'", "'.$email.'","'.$email.'", "'.$clave2.'",1,2)');
 
         session_start();
       
         $_SESSION['correo'] = $email;
-        $_SESSION['tipo']  = 3;
+        $_SESSION['tipo']  = 2;
        
-        echo 'view/clientes/index.php';
+        echo 'view/grupotrabajo/index.php';
         
 
       }
