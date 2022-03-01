@@ -2,8 +2,6 @@
 
   # Incluimos la clase conexion para poder heredar los metodos de ella.
   require_once('conexion.php');
-
-
   class Usuario extends Conexion
   {
 
@@ -119,25 +117,19 @@
         // Verificamos que cargo tiene l usuario y asi mismo dar la respuesta a ajax para que redireccione
         if($_SESSION['tipo'] == 1){
             
-          echo 'view/administrador/index.php';
-         parent::query('UPDATE usuarios SET online = "1" WHERE idusuario ='.$_SESSION['idusuario'].'');
-          
-          
-          
+        echo 'view/administrador/index.php';
+         parent::query('UPDATE usuarios SET online = "1" WHERE idusuario ='.$_SESSION['idusuario'].'');          
         }else if($_SESSION['tipo'] == 2){
           echo 'view/grupotrabajo/index.php';
         }else if($_SESSION['tipo'] == 3){
           echo 'view/clientes/index.php';
         }
-		  
-        // u.u finalizamos aqui :v
+        // u.u finalizamos aqui 
 
       }else{
         // El usuario y la clave son incorrectos
         echo 'error_3';
       }
-
-
       # Cerramos la conexion
       parent::cerrar();
     }
@@ -148,7 +140,7 @@
 
       $name  = parent::filtrar($name);
       $email = parent::filtrar($email);
-      $clave = parent::filtrar($clave);
+   
 
 
       // validar que el correo no exito
@@ -161,16 +153,14 @@
 
         $clave2 = base64_encode($clave);
 
-        parent::query('insert into usuarios(nombre,correo,usuario,clave,status,tipo) values("'.$name.'", "'.$email.'","'.$email.'", "'.$clave2.'",1,2)');
-
+        parent::query('insert into usuarios (nombre,correo,usuario,clave,status,tipo) values("'.$name.'", "'.$email.'","'.$email.'", "'.$clave2.'",1,2)');
+        
         session_start();
       
-        $_SESSION['correo'] = $email;
-        $_SESSION['tipo']  = 2;
-       
+        $_SESSION['correo'] =$email;
+        $_SESSION['usuario'] =$email;
+        $_SESSION['tipo']  =2;
         echo 'view/grupotrabajo/index.php';
-        
-
       }
      
       parent::cerrar();
