@@ -37,9 +37,9 @@ if (isset($_POST['submit'])) {
        echo "El archivo se ha subido con exito <br>";       
         } 
         $para      = 'cdtibaquicha19@gmail.com,disenoweb@mandragoraproducciones.com.co';
-    $titulo    = 'Sistema joaking ';
+    $titulo    = 'Sistema bufete ';
     $mensaje   = 'Se ha cargado  un nuevo archivo al proyecto';
-    $cabeceras = 'From: info@joakingpd.com' . "\r\n" .
+    $cabeceras = 'From: info@bufeteabogadoshs.com' . "\r\n" .
     'Reply-To: disenoweb@mandragoraproducciones.com.co' . "\r\n" .
     'X-Mailer: PHP/' . phpversion();
 

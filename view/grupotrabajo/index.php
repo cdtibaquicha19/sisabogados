@@ -177,8 +177,13 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2) {
 
 													<?php
 
+
+
+
+
+
 													if (!empty($_POST['submit2'])) {
-														$fecha = date("m-d-y");
+														$fecha = date("d-m-Y h:i:s A");
 														$psswd = substr(md5(microtime()), 1, 10);
 
 														$valor = $_SESSION['creado_por'];
