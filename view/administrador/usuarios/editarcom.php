@@ -251,7 +251,6 @@ swal("Actualizado correctamente","","success")
 			<strong><span><h5>Contraseña</h5></span></strong>
 			 <div class="input-group">
               <div class="input-group-addon">
-				  
 				</div>
 				
 				 <input class="form-control" value="<?php echo base64_decode($row->clave);?>" type="password" id="clave" name="clave" />
@@ -316,46 +315,6 @@ swal("Actualizado correctamente","","success")
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-function mostrarPassword(){
-		var cambio = document.getElementById("clave");
-		if(cambio.type == "password"){
-			cambio.type = "text";
-			$('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-		}else{
-			cambio.type = "password";
-			$('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-		}
-	} 
-	
-	$(document).ready(function () {
-	//CheckBox mostrar contrase�0�9a
-	$('#ShowPassword').click(function () {
-		$('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
-	});
-});
-</script>
-
-<script type="text/javascript">
-function mostrarPassword(){
- var cambio = document.getElementById("clave");
- if(cambio.type == "password"){
- cambio.type = "text";
- $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
- }else{
- cambio.type = "password";
- $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
- }
- } 
- 
- $(document).ready(function () {
- //CheckBox mostrar contrase�0�9a
- $('#ShowPassword').click(function () {
- $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
- });
-});
-</script>
 
 
 
