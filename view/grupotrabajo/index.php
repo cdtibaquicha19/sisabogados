@@ -278,11 +278,11 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2) {
 																	<div class="col-sm-12">
 
 																		<select name="area" class="form-control">
-																			<option>1</option>
-																			<option>2</option>
-																			<option>3</option>
-																			<option>4</option>
-																			<option>5</option>
+																			<option>Derecho Civil</option>
+																			<option>Derecho de Familia</option>
+																			<option>Derecho Penal</option>
+																			<option>Derecho Laboral </option>
+																			<option>Derecho Administrativo</option>
 																		</select>
 																	</div>
 																</div>
