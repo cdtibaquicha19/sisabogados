@@ -251,8 +251,9 @@ swal("Actualizado correctamente","","success")
 			<strong><span><h5>Contraseña</h5></span></strong>
 			 <div class="input-group">
               <div class="input-group-addon">
-				  <a  href="#" id="show_password" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> 
-				  </a>
+				  <!-- modificar ver contraseña  
+				  		<a  href="#" id="show_password" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> 
+				  </a>-->
 				</div>
 				
 				 <input class="form-control" value="<?php echo base64_decode($row->clave);?>" type="password" id="clave" name="clave" />
