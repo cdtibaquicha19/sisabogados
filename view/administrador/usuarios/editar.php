@@ -232,7 +232,7 @@ location.href=" ";
 		</div>
 		<div class="col-md-4">
 			<strong><span><h5>Contraseña</h5></span></strong>
-      <input class="form-control "  value="<?php echo base64_decode($row->clave)?>" type="password"  name="clave"  />	
+<input class="form-control "  value="<?php echo base64_decode($row->clave)?>" type="password"  name="clave"  />	
 	
 			
 			
