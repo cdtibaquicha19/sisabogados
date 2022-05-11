@@ -325,10 +325,10 @@ location = location;
 
 													<div class="col-md-12">
 														<BR />
-														<p>Listado abogados Diponibles / Seleccione (ctrl + click para seleccion multiple) </p>
+														<p>Listado abogados-clientes Diponibles / Seleccione (ctrl + click para seleccion multiple) </p>
 														<select name="id_empleado[]" class="form-control" size="7" multiple="multiple">
 															<?php
-															$sql = "select * from usuarios where tipo ='3' ";
+															$sql = "select * from usuarios where tipo ='2' ";
 															$result = db_query($sql);
 
 															while ($row = mysqli_fetch_object($result)) {

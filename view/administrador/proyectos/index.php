@@ -149,8 +149,176 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 				<div class="pull-left breadcrumb_admin clear_both">
 					<div class="pull-left page_title theme_color">
 						<h1 style="color:#182d4c ;">SOLICITUDES</h1>
+						<button style="background-color: #182d4c;" type="button" class="btn-LG btn-primary" data-toggle="modal" data-target="#myModal">
+							Crear nuevo caso <strong>+</strong>
+						</button>
 					</div>
 				</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+										<div class="modal-dialog modal-lg" role="document">
+											<div class="modal-content">
+												<div class="modal-header" style="background-color: #182d4c; color:white;">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+													<h4 class="modal-title" id="myModalLabel">PLANTEAR CASO </h4>
+												</div>
+												<div class="modal-body">
+
+													<?php
+
+
+
+
+
+
+													if (!empty($_POST['submit2'])) {
+														$fecha = date("d-m-Y h:i:s A");
+														$psswd = substr(md5(microtime()), 1, 10);
+
+														$valor = $_SESSION['creado_por'];
+														$field = array(
+															"nombre" => $_POST['nombre'],
+															"correo" => $_POST['id_empleado'],
+															"telefono" => $_POST['telefono'],
+															"direccion" => $_POST['direccion'],
+															"descripcion" => $_POST['caso'],
+															"area" => $_POST['area'],
+															"status" => 'activo',
+															"fecha_creacion" => $fecha,
+															"actualizacion" => 'Solicitud en Proceso',
+														);
+														$tbl = "casos";
+
+
+														if (insert($tbl, $field)) {
+															echo $sql;
+
+															$to = $_SESSION['correo'];
+															$subject = "Creacion correcta de caso ";
+															$headers = "MIME-Version: 1.0" . "\r\n";
+															$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+															$message = "<html>
+															<head>
+																<title>HTML</title>
+																</head>
+																<body>
+																<img src='https://sistema.bufeteabogadoshs.com/img/logo%20joaking%20curvas.png' width='350' /> 
+																<p>Los datos de acceso son:<BR>
+																URL de acceso <a href='https://sistema.bufeteabogadoshs.com'>sistema.bufeteabogadoshs.comm</a>
+																<br>
+																</p>
+																</body>
+																</html>";
+
+															mail($to, $subject, $message, $headers);
+															echo '<script type="application/javascript">
+																swal("Se ha creado el caso : ","' . $nombre . '","success")
+																.then((value) => {
+																location = location;
+																});
+
+																	</script>
+																';
+														} else {
+															echo '<script type="application/javascript">
+																	
+																			swal("No fue posible crear el caso ","' . $nombre . '","error")
+																			.then((value) => {
+																			location = location;
+																			});
+
+																	</script>
+																	';
+														}
+													}
+													?>
+													<form action=" " method="post">
+														<div class="row">
+															<div class="col-md-6">
+
+																<p class="alert alert-info">Diligencia el siguiente formulario, para la creacion de tu caso el cual sera atendido por uno de nuestros especializastas.
+																	los campos marcados (*) son obligatorios. <br>
+																	<a href="#"> Proteccion de datos personales </a>
+																</p>
+																<img class="img-responsive" src="../../../img/form1.png" />
+															</div>
+															<div class="col-md-6">
+															<div class="col-md-12">
+														<BR />
+														<p>Listado abogados-clientes Diponibles / Seleccione (ctrl + click para seleccion multiple) </p>
+														<select name="id_empleado" class="form-control" size="7" multiple="multiple">
+															<?php
+															$sql = "select * from usuarios where tipo ='2' ";
+															$result = db_query($sql);
+
+															while ($row = mysqli_fetch_object($result)) {
+															?>
+																<option value="<?php echo $row->correo; ?>"><?php echo $row->nombre; ?></option>
+															<?php } ?>
+														</select>
+														<br />
+													</div>
+																<div class="form-group">
+																	<label style="color: #182d4c;" for="inputEmail3" class="col-sm-12 control-label"> <b>NOMBRE COMPLETO</b> </label>
+																	<div class="col-sm-12">
+																		<input type="text" class="form-control" name="nombre" placeholder="">
+																	</div>
+																</div>
+																<div class="form-group">
+																	<label style="color: #182d4c;" for="inputEmail3" class="col-sm-12 control-label"> <b>TELEFONO</b></label>
+																	<div class="col-sm-12">
+																		<input type="tel" class="form-control" name="telefono" placeholder="">
+																	</div>
+																</div>
+																<div class="form-group">
+																	<label style="color: #182d4c;" for="inputEmail3" class="col-sm-12 control-label"><b>DIRECCION</b></label>
+																	<div class="col-sm-12">
+																		<input type="text" class="form-control" name="direccion" placeholder="">
+																	</div>
+																</div>
+																<div class="form-group ">
+																	<label style="color: #182d4c; text-transform: uppercase;" for="inputEmail3" class="col-sm-12 control-label"> <b>la area especializada para tu caso *</b> </label>
+																	<div class="col-sm-12">
+
+																		<select name="area" class="form-control">
+																			<option>Derecho Civil</option>
+																			<option>Derecho de Familia</option>
+																			<option>Derecho Penal</option>
+																			<option>Derecho Laboral </option>
+																			<option>Derecho Administrativo</option>
+																		</select>
+																	</div>
+																</div>
+																<div class="form-group">
+																	<label style="color: #182d4c;  text-transform: uppercase;" for="inputEmail3" class="col-sm-12 control-label"><b>Describe tu caso / Solicitud *</b> </label>
+																	<div class="col-sm-12">
+																		<textarea rows="10" class="form-control" name="caso" placeholder=""></textarea>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn-lg btn-danger" data-dismiss="modal">Cerrar</button>
+															<input class="btn-primary btn-lg" name="submit2" type="submit" value="Crear solicitud ">
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+			</div>
+
+
+
+
+
+
+
+
+
+				
 				<div class="container clear_both padding_fix">
 					<!--\\\\\\\ container  start \\\\\\-->
 					<div class="row">
@@ -203,10 +371,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 
 															<a title="Eliminar " class="label label-danger" href="borrar.php?id=<?php echo $row->idcaso; ?>">Eliminar</a>
 
-															<?php if (($row->correo == $_SESSION['correo'])) {
-																echo '<a  title="Enviar a votacion a votacion "class="label label-info" href="votaciones.php?id=' . $row->id . '"><i class="fa fa-check fa-lg" aria-hidden="true"></i></a>';
-															}
-															?>
+														
 														</td>
 													</tr>
 												<?php } ?>
