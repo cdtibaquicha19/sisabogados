@@ -169,7 +169,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 2 ) {
                       echo "no existen dependencias";
                     } else {
 
-                      echo "si existe ";
+                      echo "";
                     };
 
                     if (stristr($_SESSION['departamento'], $row2->nombre_depa)) {
