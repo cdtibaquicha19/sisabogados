@@ -68,11 +68,12 @@ if (isset($_SESSION['id'])) {
           <div class="alert alert-info" role="alert">
             <legend class="center">Sistema gestion V 3.0</legend>
 
-            Notas de version V 3.0
+            Notas de version V 3.2
 
             <ul>
 
-              <li>Correccion de errores </li>
+              <li>Correccion de errores  </li>
+              <li>actualizacion modulo administrador </li>
 
             </ul>
 

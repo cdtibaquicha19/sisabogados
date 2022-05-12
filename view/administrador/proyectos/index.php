@@ -167,12 +167,6 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 												<div class="modal-body">
 
 													<?php
-
-
-
-
-
-
 													if (!empty($_POST['submit2'])) {
 														$fecha = date("d-m-Y h:i:s A");
 														$psswd = substr(md5(microtime()), 1, 10);
@@ -239,7 +233,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 														<div class="row">
 															<div class="col-md-6">
 
-																<p class="alert alert-info">Diligencia el siguiente formulario, para la creacion de tu caso el cual sera atendido por uno de nuestros especializastas.
+																<p class="alert alert-info">Diligencia el siguiente formulario, para la creacion de tu caso.
 																	los campos marcados (*) son obligatorios. <br>
 																	<a href="#"> Proteccion de datos personales </a>
 																</p>
@@ -248,7 +242,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 															<div class="col-md-6">
 															<div class="col-md-12">
 														<BR />
-														<p>Listado abogados-clientes Diponibles / Seleccione (ctrl + click para seleccion multiple) </p>
+														<p>Listado clientes Diponibles seleccione: </p>
 														<select name="id_empleado" class="form-control" size="7" multiple="multiple">
 															<?php
 															$sql = "select * from usuarios where tipo ='2' ";
@@ -308,17 +302,7 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 											</div>
 										</div>
 									</div>
-			</div>
-
-
-
-
-
-
-
-
-
-				
+			</div>				
 				<div class="container clear_both padding_fix">
 					<!--\\\\\\\ container  start \\\\\\-->
 					<div class="row">
@@ -366,12 +350,10 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] != 1) {
 															<?php echo $row->fecha_creacion; ?>
 														</td>
 														<td>
-
 															<a class="label label-warning" href="editar.php?id=<?php echo $row->idcaso; ?>">Editar</a>
 
 															<a title="Eliminar " class="label label-danger" href="borrar.php?id=<?php echo $row->idcaso; ?>">Eliminar</a>
-
-														
+													
 														</td>
 													</tr>
 												<?php } ?>
